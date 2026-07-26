@@ -1,0 +1,56 @@
+<%- include('../partials/head') %>
+
+  <body>
+    <%- include('../partials/nav') %>
+      <div class="show-profile">
+        <div class="main">
+          <div class="card">
+            <div class="card-header">
+              <i class="fa-regular fa-circle-user"></i>
+              <h1>Profile</h1>
+
+              <a class="card-header-right" href="/profile/edit">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <p>Edit</p>
+              </a>
+            </div>
+
+            <div class="card-content">
+              <div class="card-item">
+                <p class="card-item-title">Name</p>
+                <p>
+                  <%= currentUser.first %>
+                    <%= currentUser.last %>
+                </p>
+              </div>
+
+              <div class="card-item">
+                <p class="card-item-title">Email</p>
+                <p>
+                  <%= currentUser.email %>
+                </p>
+              </div>
+
+              <div class="card-item">
+                <p class="card-item-title">Role</p>
+                <p>
+                  <%= currentUser.role %>
+                </p>
+              </div>
+
+              <div class="card-item">
+                <p class="card-item-title">Language</p>
+                <% if (currentUser.current_language) { %>
+                  <img src="/images/<%= currentUser.current_language %>.png" width="25">
+                  <p>
+                    <%= currentUser.current_language %>
+                  </p>
+                  <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </body>
+
+  </html>

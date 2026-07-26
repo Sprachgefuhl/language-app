@@ -1,0 +1,29 @@
+@import '../base/variables';
+@import '../components/mixins';
+
+.login {
+  @include centered-card;
+
+  .main {
+    min-height: 100dvh;
+  }
+
+  .card {
+    min-height: 315px;
+  }
+
+  .card-content .card-item {
+    justify-content: left;
+
+    input {
+      padding-left: 10px;
+      text-align: left;
+    }
+  }
+
+  .status {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+  }
+}

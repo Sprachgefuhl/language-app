@@ -1,0 +1,19 @@
+@import '../base/variables';
+@import '../components/mixins';
+
+.users {
+  @include centered-card;
+
+  .card-content {
+    .card-item {
+      a {
+        color: $text-primary;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.create-user {
+  @include centered-card;
+}

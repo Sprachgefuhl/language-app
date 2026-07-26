@@ -1,0 +1,35 @@
+{
+  "name": "language-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "concurrently \"npm run watch:scss\" \"npm run server\"",
+    "server": "nodemon src/app.js",
+    "watch:scss": "npx sass --watch src/scss:src/public/css --style=expanded",
+    "build:scss": "npx sass scss:src/public/css --style=compressed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^10.0.3",
+    "nodemon": "^3.1.14",
+    "scss": "^0.2.4"
+  },
+  "dependencies": {
+    "@google/genai": "^2.12.0",
+    "@supabase/supabase-js": "^2.110.7",
+    "bcrypt": "^6.0.0",
+    "cheerio": "^1.2.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "email-validator": "^2.0.4",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "method-override": "^3.0.0"
+  }
+}

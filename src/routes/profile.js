@@ -1,0 +1,14 @@
+const express = require('express');
+const router = express.Router();
+const { authenticateToken } = require('../middleware/auth');
+const { getUserByID } = require('../controllers/user');
+const { updateProfile, updateLanguage } = require('../controllers/profile');
+const langData = require('../utils/langData');
+
+router.get('/show', authenticateToken, async (req, res) => res.render('profile/showProfile', { currentUser: await getUserByID(req.currentUserId) }));
+router.get('/edit', authenticateToken, async (req, res) => res.render('profile/editProfile', { currentUser: await getUserByID(req.currentUserId), langData: langData }));
+router.post('/edit', authenticateToken, updateProfile);
+router.get('/edit/language', authenticateToken, async (req, res) => res.render('profile/editLang', { currentUser: await getUserByID(req.currentUserId), langData: langData }));
+router.post('/edit/language', authenticateToken, updateLanguage);
+
+module.exports = router;

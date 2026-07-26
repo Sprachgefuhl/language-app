@@ -1,0 +1,75 @@
+<%- include('../partials/head') %>
+
+  <body>
+    <%- include('../partials/nav') %>
+      <div class="edit-lang">
+        <div class="main">
+          <div class="card">
+            <div class="card-header">
+              <i class="fa-solid fa-earth-americas"></i>
+              <h1>Language</h1>
+              <button class="card-header-right" type="submit" form="select-lang">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <p>Save</p>
+              </button>
+            </div>
+
+            <div class="card-content">
+              <form action="/profile/edit/language" id="select-lang" method="post">
+                <% langData.forEach(lang=> { %>
+                  <img id="<%= lang.name %>" class="lang-icon" src="/images/<%= lang.name %>.png" width="60">
+                  <% }); %>
+              </form>
+              <p id="status"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        const statusEl = document.getElementById('status');
+        const langIcons = document.querySelectorAll('.lang-icon');
+        let selectedLang = '';
+
+        langIcons.forEach(langIcon => {
+          langIcon.addEventListener('mouseover', (e) => {
+            if (selectedLang.length) return;
+            const language = e.target.id;
+            statusEl.innerText = language;
+          });
+          langIcon.addEventListener('click', (e) => {
+            const language = e.target.id;
+            statusEl.innerText = language;
+            langIcons.forEach(icon => icon.style.border = 'none');
+            selectedLang = language;
+            e.target.style.border = '3px solid #4BB543';
+            e.target.style.borderRadius = '50%';
+          });
+        });
+
+        document.getElementById('select-lang').addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          if (!selectedLang.length) return;
+
+          try {
+            statusEl.textContent = 'Updating...';
+
+            const res = await fetch('/profile/edit/language', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ language: selectedLang })
+            });
+
+            const result = await res.json();
+            window.location.href = '/text'
+          } catch (err) {
+            console.error(err);
+            alert('Something went wrong. Please try again.');
+          }
+        });
+      </script>
+  </body>
+
+  </html>

@@ -1,0 +1,47 @@
+<div class="nav">
+  <div class="nav-spacer"></div>
+
+  <div class="nav-center">
+    <div class="nav-el">
+      <a href="/text">
+        <i class="fa-solid fa-book-open"></i>
+        <p>Text</p>
+      </a>
+    </div>
+
+    <% if (currentUser.role==='admin' ) { %>
+    <div class="nav-el">
+      <a href="/admin/users">
+        <i class="fa-solid fa-user-group"></i>
+        <p>Users</p>
+      </a>
+    </div>
+    <% } %>
+
+    <div class="nav-el">
+      <a href="/profile/show">
+        <i class="fa-solid fa-user"></i>
+        <p>
+          <%= currentUser.first %>
+        </p>
+      </a>
+    </div>
+
+    <div class="nav-el">
+      <a href="/profile/edit/language">
+        <% if (!currentUser.current_language) { %>
+          <i id="unselected-lang-icon" class="fa-solid fa-earth-europe"></i>
+        <% } else { %>
+          <img src="/images/<%= currentUser.current_language %>.png" width="45">
+        <% } %>
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-el" id="logout">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <p>Logout</p>
+  </div>
+</div>
+
+<script src="/js/logout.js"></script>

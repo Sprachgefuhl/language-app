@@ -1,0 +1,35 @@
+<%- include('../partials/head') %>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="daily-text">
+      <div class="main">
+        <div class="content">
+
+          <div class="text">
+            <div class="header">
+              <h2 id="text-date">
+                <i class="fa-solid fa-circle-chevron-left" id="day-before"></i>
+                <%= date %>
+                <i class="fa-solid fa-circle-chevron-right" id="day-after"></i>
+              </h2>
+            </div>
+            <div class="card">
+              <%- compiledDailyText %>
+            </div>
+          </div>
+          
+          <div class="learn">
+            <h2 class="header">Learn</h2>
+            <div class="card">
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus rem labore est, fugiat iusto asperiores culpa possimus enim harum voluptatibus aliquam cumque eveniet explicabo, commodi atque vitae laudantium, dolore aperiam!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/text.js"></script>
+  </body>
+
+</html>

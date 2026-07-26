@@ -1,0 +1,40 @@
+<%- include('../partials/head') %>
+
+  <body>
+    <div class="login">
+      <div class="main">
+        <div class="card">
+          <div class="card-header">
+            <i id="icon-status" class="fa-solid fa-user-lock"></i>
+            <h1>Login</h1>
+
+            <button class="card-header-right" type="submit" form="login-form">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>
+              <p>Login</p>
+            </button>
+          </div>
+          <div class="card-content">
+            <form id="login-form" action="/login" method="post" novalidate>
+              <div class="card-item">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" name="email" id="email" placeholder="email" autocomplete="off">
+              </div>
+
+              <div class="card-item">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" name="password" id="password" placeholder="password" autocomplete="off">
+              </div>
+            </form>
+
+            <div class="status">
+              <p id="status"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/login.js"></script>
+  </body>
+
+  </html>

@@ -1,0 +1,44 @@
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/nav') %>
+  <div class="daily-text">
+    <div class="main">
+        <div class="content">
+          <div class="text">
+            <div class="header">
+              <h2 id="text-date">
+                <i class="fa-solid fa-circle-chevron-left" id="day-before"></i>
+                <%= date %>
+                <i class="fa-solid fa-circle-chevron-right" id="day-after"></i>
+              </h2>
+            </div>
+            <div class="card">
+              <% if (!currentUser.current_language) { %>
+                <p>Select a language to get started</p>
+              <% } else { %>
+                <p>Daily text will display once loaded!</p>
+              <% } %>
+            </div>
+          </div>
+          
+          <div class="learn">
+            <h2 class="header">Load</h2>
+            <div class="card load">
+              <% if (currentUser.current_language) { %>
+                <form action="/text/analyse" method="post" id="analyse-form">
+                  <button type="submit">
+                    <i class="fa-regular fa-circle-down"></i>
+                  </button>
+
+                  <p id="status">Press</p>
+                </form>
+              <% } %>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <script src="/js/text.js"></script>
+</body>
+</html>

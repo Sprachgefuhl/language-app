@@ -1,0 +1,86 @@
+@import '../base/variables';
+@import '../components/mixins';
+
+.daily-text {
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100dvh - 115px);
+  }
+
+  .content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 30px;
+  }
+
+  .text {
+    flex: 5;
+  }
+
+  .learn {
+    flex: 2;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    padding: 10px 30px;
+    color: $text-primary;
+    i {
+      padding: 0 5px;
+      font-size: 28px;
+      &:hover {
+        color: $text-muted;
+      }
+    }
+  }
+
+  .card {
+    margin: 0 15px;
+    padding: 20px 30px;
+    min-height: 375px;
+    max-height: 600px;
+    overflow-y: auto;
+    background-color: $bg-secondary;
+    border: 2px solid $colour-border;
+    border-radius: 15px;
+    color: $text-primary;
+    font-size: 24px;
+    line-height: 50px;
+    box-shadow: 10.0px 20.0px 20.0px hsl(0deg 0% 0% / 0.20);  
+  }
+
+  .load {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } form  {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    button {
+      background: none;
+      border: none;
+      color: $text-primary;
+      font-size: 40px;
+      &:hover {
+        color: $text-muted;
+      }
+    }
+    p {
+      font-size: 22px;
+    }
+  }
+
+  .noun {
+    border-bottom: 3px solid $blue;
+  }
+
+  .chunk {
+    border-bottom: 3px solid $orange;
+  }
+}
