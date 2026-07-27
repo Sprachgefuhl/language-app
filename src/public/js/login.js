@@ -23,9 +23,9 @@ form.addEventListener('submit', async (e) => {
 
     const result = await res.json();
     if (result.msg === 'Successfully logged in') {
-      await delay(1000);
+      // await delay(1000);
       iconStatusEl.classList = 'fa-solid fa-lock-open';
-      await delay(500);
+      // await delay(500);
       return window.location.reload();
     }
 

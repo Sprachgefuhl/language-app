@@ -12,6 +12,7 @@ const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
 const profileRouter = require('./routes/profile');
 const textRouter = require('./routes/text');
+const decksRouter = require('./routes/decks');
 
 // middleware
 app.use(methodOverride('_method'));
@@ -27,5 +28,6 @@ app.use('/', authRouter);
 app.use('/admin', adminRouter);
 app.use('/profile', profileRouter);
 app.use('/text', textRouter);
+app.use('/decks', decksRouter);
 
 app.listen(PORT, () => console.log(`🌐 Server running on Port: ${PORT}`));

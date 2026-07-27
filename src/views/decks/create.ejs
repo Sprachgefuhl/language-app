@@ -1,0 +1,34 @@
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/nav') %>
+  <div class="create-deck">
+    <div class="main">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa-solid fa-bolt"></i>
+          <h1>Create</h1>
+          <!-- <button class="card-header-right" type="submit" form="create-user-form">
+            <i class="fa-regular fa-floppy-disk"></i>
+            <p>Save</p>
+          </button> -->
+        </div>
+
+        <div class="card-content">
+          <form id="create-deck-form" action="/decks/new" method="post">
+
+            <div class="card-item">
+              <p class="card-item-title">Name</p>
+              <input type="text" id="name" name="name" placeholder="name" required>
+            </div>
+
+            <div class="card-item">
+              <p class="card-item-title">Language</p>
+              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -32,3 +32,9 @@ select:-webkit-autofill:focus {
 input {
   caret-color: $text-primary;
 }
+
+@media (max-width: $bp-mobile) {
+  body {
+    font-size: 16px;
+  }
+}

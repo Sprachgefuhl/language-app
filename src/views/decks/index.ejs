@@ -1,0 +1,28 @@
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/nav') %>
+  <div class="decks">
+    <div class="main">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa-solid fa-bolt"></i>
+          <h1>Decks</h1>
+
+          <a class="card-header-right" href="/decks/new">
+            <i class="fa-solid fa-plus"></i>
+            <p>Create</p>
+          </a>
+        </div>
+
+        <div class="card-content">
+          <% if (decks) { %>
+            <% decks.forEach(deck => { %>
+              
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -30,9 +30,11 @@
     margin: 0 15px;
     padding: 10px 30px;
     color: $text-primary;
+
     i {
       padding: 0 5px;
       font-size: 28px;
+
       &:hover {
         color: $text-muted;
       }
@@ -44,43 +46,109 @@
     padding: 20px 30px;
     min-height: 375px;
     max-height: 600px;
+    user-select: none;
     overflow-y: auto;
     background-color: $bg-secondary;
     border: 2px solid $colour-border;
     border-radius: 15px;
     color: $text-primary;
     font-size: 24px;
-    line-height: 50px;
-    box-shadow: 10.0px 20.0px 20.0px hsl(0deg 0% 0% / 0.20);  
+    line-height: 2;
+    word-spacing: -1ch;
+    box-shadow: 10.0px 20.0px 20.0px hsl(0deg 0% 0% / 0.20);
   }
 
-  .load {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } form  {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    button {
-      background: none;
-      border: none;
-      color: $text-primary;
-      font-size: 40px;
-      &:hover {
-        color: $text-muted;
+  .word {
+    padding: 5px 4px;
+    cursor: pointer;
+    &:hover {
+      border-bottom: 3px solid $red;
+    }
+  }
+
+  .selected {
+    background-color: $red;
+    border-bottom: 3px solid $red;
+  }
+
+  // Tablet
+  @media (max-width: $bp-tablet) {
+    .main {
+      min-height: calc(100dvh - 72px);
+      align-items: flex-start;
+    }
+
+    .content {
+      flex-direction: column;
+      margin: 16px;
+      gap: 20px;
+    }
+
+    .text,
+    .learn {
+      flex: none;
+      width: 100%;
+    }
+
+    .header {
+      margin: 0 0 8px;
+      padding: 8px 12px;
+
+      h2 {
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      i {
+        font-size: 22px;
       }
     }
-    p {
-      font-size: 22px;
+
+    .card {
+      margin: 0;
+      padding: 16px 18px;
+      min-height: 200px;
+      max-height: none; // allow natural height on mobile
+      font-size: 18px;
+      line-height: 2.1;
+      border-radius: 12px;
     }
   }
 
-  .noun {
-    border-bottom: 3px solid $blue;
-  }
+  // Mobile
+  @media (max-width: $bp-mobile) {
+    .content {
+      margin: 12px;
+      gap: 16px;
+    }
 
-  .chunk {
-    border-bottom: 3px solid $orange;
+    .card {
+      padding: 14px 14px;
+      font-size: 16px;
+      line-height: 2.4;
+    }
+
+    .text-con {
+      height: 50dvh;
+    }
+
+    .header {
+      justify-content: center;
+      padding: 6px 8px;
+
+      h2 {
+        font-size: 16px;
+      }
+
+      i {
+        font-size: 20px;
+      }
+    }
+
+    .word:hover, .selected {
+      border: none;
+    }
   }
 }

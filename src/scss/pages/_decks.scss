@@ -1,0 +1,10 @@
+@import '../base/variables';
+@import '../components/mixins';
+
+.decks {
+  @include centered-card;
+}
+
+.create-deck {
+  @include centered-card;
+}

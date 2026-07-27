@@ -8,15 +8,6 @@ const generateToken = () => {
   return crypto.randomBytes(32).toString('hex');
 }
 
-const isValidJSON = (str) => {
-  try {
-    JSON.parse(str);
-    return true;
-  } catch (err) {
-    return false;
-  }
-}
-
 const standardizeDate = (date) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -25,25 +16,12 @@ const standardizeDate = (date) => {
   return `${year}/${month}/${day}`;
 }
 
-const getTermPositionsInStr = (text, terms) => {
-  const results = [];
-
-  for (const term of terms) {
-    const index = text.toLowerCase().indexOf(term.toLowerCase());
-
-    if (index !== -1) {
-      results.push({
-        term: term,
-        start: index,
-        end: index + term.length - 1,
-      });
-    }
-  }
-
-  // Sort by position in original text
-  results.sort((a, b) => a.start - b.start);
-
-  return results;
+const humanizeDate = (date) => {
+  const dateObj = new Date(date);
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const month = months[dateObj.getMonth()];
+  const day = dateObj.getDate();
+  return `${month} ${day}`;
 }
 
 function timeoutPromise(promise, ms) {
@@ -57,4 +35,4 @@ function timeoutPromise(promise, ms) {
   });
 }
 
-module.exports = { hash, generateToken, isValidJSON, standardizeDate, getTermPositionsInStr, timeoutPromise };
+module.exports = { hash, generateToken, standardizeDate, humanizeDate, timeoutPromise };

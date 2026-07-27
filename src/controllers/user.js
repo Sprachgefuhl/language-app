@@ -44,6 +44,7 @@ const createUser = async (req, res) => {
         first: first,
         last: last,
         current_language: null,
+        decks: null,
         email: email.trim().toLowerCase(),
         password: await bcrypt.hash('123', 12),
         role: 'user'

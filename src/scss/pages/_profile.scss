@@ -29,4 +29,35 @@
     flex-wrap: wrap;
     gap: 30px;
   }
+
+  #status {
+    padding-bottom: 20px;
+  }
+}
+
+// Tablet
+@media (max-width: $bp-tablet) {
+  .edit-lang {
+    #select-lang {
+      padding: 20px 12px;
+      gap: 18px;
+    }
+
+    .lang-icon {
+      width: 48px !important;
+    }
+  }
+}
+
+// Mobile
+@media (max-width: $bp-mobile) {
+  .edit-lang {
+    #select-lang {
+      gap: 14px;
+    }
+
+    .lang-icon {
+      width: 42px !important;
+    }
+  }
 }

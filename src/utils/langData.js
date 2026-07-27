@@ -4,10 +4,6 @@ const langData = [
     scraperUrl: 'https://wol.jw.org/es/wol/h/r4/lp-s/',
   },
   {
-    name: 'French',
-    scraperUrl: 'https://wol.jw.org/fr/wol/h/r30/lp-f/',
-  },
-  {
     name: 'Portuguese',
     scraperUrl: 'https://wol.jw.org/pt/wol/h/r5/lp-t/',
   },
@@ -16,8 +12,8 @@ const langData = [
     scraperUrl: 'https://wol.jw.org/de/wol/h/r10/lp-x/',
   },
   {
-    name: 'Japanese',
-    scraperUrl: 'https://wol.jw.org/ja/wol/h/r7/lp-j/',
+    name: 'French',
+    scraperUrl: 'https://wol.jw.org/fr/wol/h/r30/lp-f/',
   },
   {
     name: 'Italian',
@@ -27,10 +23,14 @@ const langData = [
     name: 'Dutch',
     scraperUrl: 'https://wol.jw.org/nl/wol/h/r18/lp-o/',
   },
-  {
-    name: 'Polish',
-    scraperUrl: 'https://wol.jw.org/pl/wol/h/r12/lp-p/',
-  },
+  // {
+  //   name: 'Polish',
+  //   scraperUrl: 'https://wol.jw.org/pl/wol/h/r12/lp-p/',
+  // },
+  // {
+  //   name: 'Japanese',
+  //   scraperUrl: 'https://wol.jw.org/ja/wol/h/r7/lp-j/',
+  // },
 ];
 
 module.exports = langData;
