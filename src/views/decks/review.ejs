@@ -1,0 +1,87 @@
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/nav') %>
+  <div class="review">
+    <div class="main">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa-solid fa-book card-header-icon"></i>
+          <h1 class="card-header-title"><%= deck.name %></h1>
+
+          <div class="card-header-right">
+            <a href="/decks">
+              <i class="fa-solid fa-arrow-left card-header-right-icon"></i>
+            </a>
+            <p id="review-count"><%= totalDue %></p>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <% if (!card) { %>
+            <div class="nothing">
+              <p>No cards due for review</p>
+            </div>
+          <% } else { %>
+            <div class="flashcard" data-deck="<%= JSON.stringify(deck) %>" data-card="<%= JSON.stringify(card) %>">
+
+            <div class="flashcard-top">
+              <span class="flashcard-top-header">front</span>
+              <p class="flashcard-top-body" id="front"></p>
+            </div>
+
+            <div class="flashcard-bottom">
+              <i class="fa-regular fa-circle-check answer" id="success"></i>
+              <i class="fa-regular fa-circle-xmark answer" id="fail"></i>
+            </div>
+
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const flashcard = document.querySelector('.flashcard');
+    const header = document.querySelector('.flashcard-top-header');
+    const content = document.getElementById('front');
+    const answerBtns = document.querySelectorAll('.answer');
+    const deck = JSON.parse(flashcard.dataset.deck);
+    const card = JSON.parse(flashcard.dataset.card);
+
+    content.textContent = card.front;
+
+    async function handleAnswer(e) {
+      const result = e.target.id;
+
+      header.textContent = 'back';
+      content.textContent = card.back;
+      answerBtns[1].style.display = 'none';
+      answerBtns[0].classList = 'fa-regular fa-circle-right';
+      answerBtns[0].addEventListener('click', async () => fetchReview(result));
+    }
+
+    async function fetchReview(answer) {
+      const success = answer === 'success' ? true : false;
+
+      try {
+        const res = await fetch(`/decks/review/:${deck.id}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ deck: deck, card: card, success: success })
+        });
+
+        const result = await res.json();
+        if (result.msg === 'Card reviewed') window.location.reload();
+      } catch (err) {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      }
+    }
+
+    answerBtns.forEach(btn => btn.addEventListener('click', (e) => handleAnswer(e)));
+  </script>
+</body>
+</html>

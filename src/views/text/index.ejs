@@ -12,7 +12,7 @@
               <i class="fa-solid fa-circle-chevron-right" id="day-after"></i>
             </h2>
           </div>
-          <div class="card text-con">
+          <div class="card text-card">
             <% if (!dailyText.length) { %>
               <p style="word-spacing: normal;">Select your language to get started!</p>
             <% } else { %>
@@ -25,10 +25,37 @@
           </div>
         </div>
         
-        <div class="learn">
-          <h2 class="header">Research</h2>
-          <div class="card">
-            <i class="fa-solid fa-book" id="research-btn"></i>
+        <div class="translate">
+          <div class="header">
+            <h2 id="translate-title">Translate</h2>
+          </div>
+          <div class="card translate-card">
+            <div class="translate-card-chunk">
+              <p class="translate-card-header">Chunk</p>
+              <p id="selected"></p>
+            </div>
+
+            <div class="translate-card-result">
+              <p class="translate-card-header">Translation</p>
+              <p id="result"></p>
+            </div>
+
+            <div class="translate-card-flashcard">
+              <i class="fa-solid fa-language" id="translate-btn"></i>
+
+              <div class="select-deck">
+                <% if (!decks.length) { %>
+                  <p>No decks</p>
+                <% } else { %>
+                  <select name="select-deck" id="select-deck">
+                    <% decks.forEach(deck => { %>
+                      <option value="<%= deck.id %>"><%= deck.name %></option>
+                    <% }); %>
+                  </select>
+                <% } %>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

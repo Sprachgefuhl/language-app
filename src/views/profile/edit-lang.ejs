@@ -1,0 +1,78 @@
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/nav') %>
+  <div class="edit-lang">
+    <div class="main">
+      <div class="card">
+        
+        <div class="card-header">
+          <i class="fa-solid fa-earth-americas card-header-icon"></i>
+          <h1 class="card-header-title">Language</h1>
+          <div class="card-header-right" id="update-lang-btn">
+            <i class="fa-solid fa-floppy-disk card-header-right-icon"></i>
+            <p>Save</p>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <div id="select-lang">
+            <% langData.forEach(lang=> { %>
+              <img id="<%= lang.name %>" class="lang-icon" src="/images/<%= lang.name %>.png" width="60">
+            <% }); %>
+          </div>
+
+          <div class="card-status">
+            <p id="status"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const langIcons = document.querySelectorAll('.lang-icon');
+    let selectedLang = '';
+
+    langIcons.forEach(langIcon => {
+      langIcon.addEventListener('mouseover', (e) => {
+        if (selectedLang.length) return;
+        const language = e.target.id;
+        statusEl.innerText = language;
+      });
+      langIcon.addEventListener('click', (e) => {
+        const language = e.target.id;
+        statusEl.innerText = language;
+        langIcons.forEach(icon => icon.style.border = 'none');
+        selectedLang = language;
+        e.target.style.border = '3px solid #4BB543';
+        e.target.style.borderRadius = '50%';
+      });
+    });
+
+    document.getElementById('update-lang-btn').addEventListener('click', async () => {
+      if (!selectedLang.length) return;
+
+      try {
+        statusEl.textContent = 'Updating...';
+
+        const res = await fetch('/profile/edit/language', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ language: selectedLang })
+        });
+
+        const result = await res.json();
+        if (result.msg === 'Successfully updated language') window.location.href = '/text';
+        else statusEl.textContent = result.msg;
+      } catch (err) {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
+</body>
+
+</html>

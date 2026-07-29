@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100dvh - 115px);
+    min-height: calc(90dvh - 115px);
   }
 
   .content {
@@ -14,14 +14,6 @@
     width: 100%;
     height: 100%;
     margin: 30px;
-  }
-
-  .text {
-    flex: 5;
-  }
-
-  .learn {
-    flex: 2;
   }
 
   .header {
@@ -33,12 +25,21 @@
 
     i {
       padding: 0 5px;
+      cursor: pointer;
       font-size: 28px;
 
       &:hover {
         color: $text-muted;
       }
     }
+  }
+
+  .text {
+    flex: 5;
+  }
+
+  .translate {
+    flex: 2;
   }
 
   .card {
@@ -58,17 +59,90 @@
     box-shadow: 10.0px 20.0px 20.0px hsl(0deg 0% 0% / 0.20);
   }
 
+  .text-card {
+    height: 100%;
+  }
+
+  .translate-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 0 20px;
+    user-select: text;
+    font-size: 20px;
+    line-height: 1.7;
+    word-spacing: normal;
+
+    input {
+      padding: 5px 0;
+      background: none;
+      border: none;
+      outline: none;
+      font-style: italic;
+      font-size: 20px;
+      color: $text-primary;
+    }
+
+    &-header {
+      font-size: 16px;
+      font-weight: $font-bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.6;
+    }
+
+    &-chunk, &-result {
+      flex: 2;
+      overflow-y: auto;
+      border-bottom: 2px solid $colour-border;
+    }
+
+    &-result {
+      margin-top: 10px;
+    }
+
+    &-flashcard {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      cursor: pointer;
+
+      i {
+        font-size: 26px;
+      }
+
+      .select-deck {
+        display: none;
+      }
+
+      #select-deck {
+        padding: 5px 10px;
+        background: none;
+        color: $text-primary;
+        font-size: 16px;
+        border: none;
+      }
+    }
+
+    #selected, #result {
+      font-style: italic;
+    }
+  }
+
   .word {
     padding: 5px 4px;
     cursor: pointer;
     &:hover {
-      border-bottom: 3px solid $red;
+      border-bottom: 3px solid $blue;
     }
   }
 
   .selected {
-    background-color: $red;
-    border-bottom: 3px solid $red;
+    background-color: $blue;
+    border-bottom: 3px solid $blue;
   }
 
   // Tablet
@@ -85,7 +159,7 @@
     }
 
     .text,
-    .learn {
+    .translate {
       flex: none;
       width: 100%;
     }
@@ -109,11 +183,15 @@
     .card {
       margin: 0;
       padding: 16px 18px;
-      min-height: 200px;
-      max-height: none; // allow natural height on mobile
+      max-height: 400px;
+      height: 100%;
       font-size: 18px;
       line-height: 2.1;
       border-radius: 12px;
+    }
+
+    .translate-card {
+      min-height: 200px;
     }
   }
 
@@ -125,13 +203,32 @@
     }
 
     .card {
+      max-height: 600px;
       padding: 14px 14px;
       font-size: 16px;
       line-height: 2.4;
     }
 
-    .text-con {
+    .text-card {
       height: 50dvh;
+    }
+
+    .translate-card {
+      padding-bottom: 0;
+      height: 25dvh;
+      line-height: 1.5;
+
+      input {
+        font-size: 16px;
+      }
+
+      &-header {
+        font-size: 14px;
+      }
+
+      &-flashcard {
+        display: flex;
+      }
     }
 
     .header {
@@ -139,16 +236,12 @@
       padding: 6px 8px;
 
       h2 {
-        font-size: 16px;
+        font-size: 18px;
       }
 
       i {
         font-size: 20px;
       }
-    }
-
-    .word:hover, .selected {
-      border: none;
     }
   }
 }

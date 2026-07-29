@@ -1,30 +1,37 @@
-// const statusEl = document.getElementById('status');
-// const executeIcon = document.querySelector('.fa-circle-down');
+const textDate = document.getElementById('text-date').textContent.trim();
 const beforeIcon = document.getElementById('day-before');
 const afterIcon = document.getElementById('day-after');
-const textDate = document.getElementById('text-date').textContent.trim();
 const textWordEls = [...document.querySelectorAll('.word')];
 const textCon = document.querySelector('.text-con');
-// let isAnalysisRunning = false;
-// let statusBlinkInterval;
+const flashcardCon = document.querySelector('.translate-card-flashcard');
+const headers = document.querySelectorAll('.translate-card-header');
+const frontEl = document.getElementById('selected');
+const backEl = document.getElementById('result');
+const translateBtn = document.getElementById('translate-btn');
 let selected = false;
+let translated = false;
 
 textWordEls.forEach((el, i) => {
   el.addEventListener('mousedown', (e) => {
-    if (!selected) {
-      e.target.classList.add('selected');
-      return selected = true;
-    }
+    if (translated) return window.location.reload();
 
-    if (wordHasNeighbours(e.target, i)) {
+    if (wordHasNeighbours(e.target, i) || selected == false) {
+      selected = true;
       e.target.classList.add('selected');
     } else {
       // reset
       textWordEls.forEach(el => el.classList.remove('selected'));
       selected = false;
     }
+
+    document.getElementById('selected').textContent = getSelectedChunk();
   });
 });
+
+function getSelectedChunk() {
+  const chunk = Array.from(textWordEls).filter(word => word.classList.contains('selected')).map(s => s.textContent).join(' ');
+  return chunk;
+}
 
 function wordHasNeighbours(el, index) {
   let nextNeighbour = el.nextElementSibling.classList.contains('selected');
@@ -72,26 +79,54 @@ function jumpDate(isBefore) {
   window.location.href = `/text?date=${standardizeDate(date)}`;
 }
 
-beforeIcon.addEventListener('click', () => jumpDate(true));
-afterIcon.addEventListener('click', () => jumpDate(false));
+function createCard() {
+  if (!translated) return;
 
-document.getElementById('research-btn').addEventListener('click', async () => {
+  const front = frontEl.textContent;
+  const back = backEl.textContent;
 
-  // const urlParams = new URLSearchParams(window.location.search);
-  // const dateVal = urlParams.get('date');
-  // const date = dateVal ? dateVal : new Date();
+  headers[0].textContent = 'Front';
+  headers[1].textContent = 'Back';
+  frontEl.innerHTML = `<input type="text" id="front" value="${front}">`;
+  backEl.innerHTML = `<input type="text" id="back" value="${back}">`;
+  translateBtn.classList = 'fa-regular fa-circle-down';
+  document.getElementById('translate-title').textContent = 'Create Card';
+  document.querySelector('.select-deck').style.display = 'flex';
 
-  const chunk = Array.from(textWordEls).filter(word => word.classList.contains('selected')).map(s => s.textContent).join(' ');
+  translateBtn.addEventListener('click', async () => {
+    const deckId = document.getElementById('select-deck').value;
+
+    try {
+      backEl.textContent = 'Saving...';
+
+      const res = await fetch(`/decks/${deckId}/create-card`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ front: front, back: back })
+      });
+
+      const data = await res.json();
+      if (data.msg === 'created') {
+        window.location.reload();
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Something went wrong. Please try again.');
+    }
+  });
+}
+
+translateBtn.addEventListener('click', async () => {
+  const chunk = getSelectedChunk();
   if (!chunk.length) return;
   const dailyText = Array.from(textWordEls).map(s => s.textContent).join(' ');
 
   try {
-    // document.body.inert = true;
-    // isDebugRunning = true;
-    // statusBlink(executeIcon, '#fff', '#58acf1');
-    // statusEl.textContent = 'Getting Daily Text..';
+    backEl.textContent = 'Translating...';
 
-    const res = await fetch(`/text/research`, {
+    const res = await fetch(`/text/translate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -100,16 +135,20 @@ document.getElementById('research-btn').addEventListener('click', async () => {
     });
 
     const data = await res.json();
-    console.log(data);
-    // if (data.msg === 'Successfully analysed') window.location.reload();
-    // else statusEl.textContent = data.msg;
+    if (data.msg === 'translated') {
+      backEl.textContent = data.translation;
+    }
 
   } catch (err) {
     console.error(err);
     alert('Something went wrong. Please try again.');
   }
 
-  // isDebugRunning = false;
-  // clearStatusBlink(executeIcon);
-  // document.body.inert = false;
-});
+  translated = true;
+  translateBtn.id = 'create-card-btn';
+  translateBtn.classList = 'fa-solid fa-bolt';
+  translateBtn.addEventListener('click', () => createCard());
+}, { once: true });
+
+beforeIcon.addEventListener('click', () => jumpDate(true));
+afterIcon.addEventListener('click', () => jumpDate(false));

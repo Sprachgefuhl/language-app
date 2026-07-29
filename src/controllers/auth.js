@@ -8,14 +8,14 @@ const loginUser = async (req, res, next) => {
 
   // missing details
   if (!formEmail || !formPassword) {
-    return res.status(400).json({ success: false, msg: 'Email and password required' })
+    return res.status(400).json({ msg: 'Email and password required' })
   }
 
   const user = await getUserByEmail(formEmail);
 
   // no user
   if (!user) {
-    return res.status(401).json({ success: false, msg: 'Invalid credentials' });
+    return res.status(401).json({ msg: 'Invalid credentials' });
   }
 
   // password check
@@ -26,7 +26,7 @@ const loginUser = async (req, res, next) => {
     return res.status(200).json({ msg: 'Successfully logged in' });
   }
 
-  return res.status(401).json({ success: false, msg: 'Invalid credentials' });
+  return res.status(401).json({ msg: 'Invalid credentials' });
 }
 
 const logoutUser = (req, res, next) => {

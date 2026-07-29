@@ -4,9 +4,9 @@
 .show-profile {
   @include centered-card;
 
-  // Add page-specific overrides
-  .card {
-    // max-height: 520px;   // override if needed
+  img {
+    margin-left: auto;
+    margin-right: 10px;
   }
 }
 
@@ -17,21 +17,12 @@
 .edit-lang {
   @include centered-card;
 
-  .card-content {
-    text-align: center;
-    // flex: 1;  
-  }
-
   #select-lang {
     padding: 30px 30px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 30px;
-  }
-
-  #status {
-    padding-bottom: 20px;
   }
 }
 

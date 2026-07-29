@@ -9,7 +9,7 @@
   }
 
   .card {
-    min-height: 315px;
+    min-height: 300px;
   }
 
   .card-content .card-item {
@@ -19,11 +19,5 @@
       padding-left: 10px;
       text-align: left;
     }
-  }
-
-  .status {
-    display: flex;
-    justify-content: center;
-    padding-top: 30px;
   }
 }

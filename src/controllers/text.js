@@ -122,7 +122,7 @@ const translateChunk = async (chunk, language, dailyText) => {
 
     const translation = JSON.parse(response.text);
     // const newArchive = await createArchive(userId, language, date, analysis, content);
-    console.log(translation);
+    return translation;
   } catch (error) {
     console.error('Error communicating with Gemini API:', error);
     return error;

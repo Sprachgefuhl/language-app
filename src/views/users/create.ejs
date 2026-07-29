@@ -1,0 +1,69 @@
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/nav') %>
+  <div class="create-user">
+    <div class="main">
+      <div class="card">
+
+        <div class="card-header">
+          <i class="fa-regular fa-user card-header-icon"></i>
+          <h1 class="card-header-title">Create</h1>
+
+          <div class="card-header-right" id="create-user-btn">
+            <i class="fa-regular fa-floppy-disk card-header-right-icon"></i>
+            <p>Save</p>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <div class="card-item">
+            <p class="card-item-title">First</p>
+            <input type="text" id="first" name="first" placeholder="first">
+          </div>
+
+          <div class="card-item">
+            <p class="card-item-title">Last</p>
+            <input type="text" id="last" name="last" placeholder="last">
+          </div>
+
+          <div class="card-item">
+            <p class="card-item-title">Email</p>
+            <input type="email" id="email" name="email" placeholder="email">
+          </div>
+
+          <div class="card-status">
+            <p id="status"></p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+
+    document.getElementById('create-user-btn').addEventListener('click', async () => {
+      try {
+        const [first, last, email] = ['first', 'last', 'email'].map(id => document.getElementById(id).value);
+        statusEl.textContent = 'Creating...';
+
+        const res = await fetch('/admin/users/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ first: first, last: last, email: email })
+        });
+
+        const result = await res.json();
+        if (result.msg === 'Successfully created user') window.location.href = '/admin/users'
+        else statusEl.textContent = result.msg;
+      } catch (err) {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -7,8 +7,11 @@ const updateProfile = async (req, res) => {
   const user = await getUserByID(req.currentUserId);
   const language = user.current_language;
 
+  // validate name not empty
+  if (!first.length || !last.length) return res.status(400).json({ msg: 'Missing required fields' });
+
   // validate password
-  if (password && password !== repeat || repeat && repeat !== password) return res.status(401).send('Password does not match');
+  if (password && password !== repeat || repeat && repeat !== password) return res.status(401).json({ msg: 'Password does not match' });
   if (password) password = await bcrypt.hash(password, 12);
   else password = user.password;
 
@@ -26,13 +29,14 @@ const updateProfile = async (req, res) => {
   if (error) throw new Error(error.message);
   console.log(`👤 ${user.first} ${user.last}'s profile has been updated`);
 
-  res.redirect('/profile/show');
+  // res.redirect('/profile/show');
+  res.status(200).json({ msg: 'Successfully updated profile' });
 }
 
 const updateLanguage = async (req, res) => {
   const language = req.body.language
   const user = await getUserByID(req.currentUserId);
-
+  
   const { data, error } = await supabase
     .from('users')
     .update({

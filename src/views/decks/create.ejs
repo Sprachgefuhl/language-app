@@ -1,34 +1,58 @@
 <%- include('../partials/head') %>
 <body>
   <%- include('../partials/nav') %>
-  <div class="create-deck">
+  <div class="create">
     <div class="main">
       <div class="card">
+
         <div class="card-header">
-          <i class="fa-solid fa-bolt"></i>
-          <h1>Create</h1>
-          <!-- <button class="card-header-right" type="submit" form="create-user-form">
-            <i class="fa-regular fa-floppy-disk"></i>
+          <i class="fa-solid fa-bolt card-header-icon"></i>
+          <h1 class="card-header-title">Create</h1>
+
+          <div class="card-header-right" id="create-deck-btn">
+            <i class="fa-regular fa-floppy-disk card-header-right-icon"></i>
             <p>Save</p>
-          </button> -->
+          </div>
         </div>
 
         <div class="card-content">
-          <form id="create-deck-form" action="/decks/new" method="post">
+          <div class="card-item">
+            <p class="card-item-title">Name</p>
+            <input type="text" id="name" name="name" placeholder="name" required>
+          </div>
 
-            <div class="card-item">
-              <p class="card-item-title">Name</p>
-              <input type="text" id="name" name="name" placeholder="name" required>
-            </div>
-
-            <div class="card-item">
-              <p class="card-item-title">Language</p>
-              
-            </div>
-          </form>
+          <div class="card-status">
+            <p id="status"></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+
+    document.getElementById('create-deck-btn').addEventListener('click', async () => {
+      try {
+        const deckName = document.getElementById('name').value.trim();
+        statusEl.textContent = 'Creating...';
+
+        const res = await fetch('/decks/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: deckName })
+        });
+
+        const result = await res.json();
+        if (result.msg === 'Successfully created deck') window.location.href = '/decks'
+        else statusEl.textContent = result.msg;
+      } catch (err) {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
 </body>
-</html>
+</html> 

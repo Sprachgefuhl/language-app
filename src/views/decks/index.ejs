@@ -5,11 +5,11 @@
     <div class="main">
       <div class="card">
         <div class="card-header">
-          <i class="fa-solid fa-bolt"></i>
-          <h1>Decks</h1>
+          <i class="fa-solid fa-bolt card-header-icon"></i>
+          <h1 class="card-header-title">Decks</h1>
 
-          <a class="card-header-right" href="/decks/new">
-            <i class="fa-solid fa-plus"></i>
+          <a class="card-header-right" href="/decks/create">
+            <i class="fa-solid fa-plus card-header-right-icon"></i>
             <p>Create</p>
           </a>
         </div>
@@ -17,7 +17,18 @@
         <div class="card-content">
           <% if (decks) { %>
             <% decks.forEach(deck => { %>
-              
+              <div class="card-item">
+                <a href="/decks/review/<%= deck.id %>">
+                  <p class="card-item-title"><%= deck.name %></p>
+                </a>
+
+                <div class="card-item-right">
+                  <p id="review-count">
+                    <%= dueCardsPerDeck.find(item => item.deckId === deck.id).totalCardsDue; %>
+                  </p>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+              </div>
             <% }) %>
           <% } %>
         </div>

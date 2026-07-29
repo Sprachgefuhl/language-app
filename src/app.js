@@ -9,7 +9,7 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 
 const authRouter = require('./routes/auth');
-const adminRouter = require('./routes/admin');
+const usersRouter = require('./routes/users');
 const profileRouter = require('./routes/profile');
 const textRouter = require('./routes/text');
 const decksRouter = require('./routes/decks');
@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // routes
 app.use('/', authRouter);
-app.use('/admin', adminRouter);
+app.use('/admin/users', usersRouter);
 app.use('/profile', profileRouter);
 app.use('/text', textRouter);
 app.use('/decks', decksRouter);

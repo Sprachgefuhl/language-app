@@ -3,8 +3,134 @@
 
 .decks {
   @include centered-card;
+
+  #review-count {
+    align-items: center;
+    color: $blue
+  }
+
+  .card-item-title {
+    border-bottom: 2px solid $text-muted;
+  }
+
+  .card-item-right {
+    display: flex;
+    gap: 15px;
+  }
 }
 
-.create-deck {
+.create {
   @include centered-card;
+}
+
+.review {
+  @include centered-card;
+
+  .card-header-right {
+    cursor: default;
+
+    &-icon:hover {
+      color: $text-muted;
+    }
+  }
+
+  #review-count {
+    color: $blue
+  }
+
+  .flashcard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    &-top {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+
+      &-header {
+        font-size: 14px;
+        font-weight: $font-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.6;
+      }
+
+      &-body {
+        font-size: 24px;
+        font-weight: $font-medium;
+      }
+    }
+
+    &-bottom {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-top: 2px solid $colour-border;
+      font-size: 30px;
+
+      .answer:hover {
+        cursor: pointer;
+      }
+
+      #success {
+        color: $green;
+      }
+
+      #fail {
+        color: $red;
+      }
+    }
+  }
+
+  .nothing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+}
+
+// Mobile
+@media (max-width: $bp-mobile) {
+  .decks {
+    .card-header .card-header-right-icon {
+      font-size: 16px;
+    }
+    .card-item-right {
+      align-items: center;
+      #review-count {
+        font-size: 16px;
+      }
+    }
+  }
+  
+  .review {
+    .card-header .card-header-right-icon {
+      font-size: 16px;
+    }
+
+    .flashcard {
+      &-top {
+        &-header {
+          font-size: 12px;
+        }
+
+        &-body {
+          font-size: 18px; 
+        }
+      }
+
+      &-bottom {
+        font-size: 25px;
+      }
+    }
+  }
 }

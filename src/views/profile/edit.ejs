@@ -1,0 +1,79 @@
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/nav') %>
+  <div class="edit-profile">
+    <div class="main">
+      <div class="card">
+        
+        <div class="card-header">
+          <i class="fa-regular fa-circle-user card-header-icon"></i>
+          <h1 class="card-header-title">Edit</h1>
+
+          <div class="card-header-right" id="edit-profile-btn">
+            <i class="fa-regular fa-floppy-disk card-header-right-icon"></i>
+            <p>Save</p>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <div class="card-item">
+            <p class="card-item-title">First</p>
+            <input type="text" id="first" name="first" value="<%= currentUser.first %>" required>
+          </div>
+
+          <div class="card-item">
+            <p class="card-item-title">Last</p>
+            <input type="text" id="last" name="last" value="<%= currentUser.last %>" required>
+          </div>
+
+          <div class="card-item">
+            <p class="card-item-title">Password</p>
+            <input type="password" id="password" name="password" placeholder="Leave blank to keep"
+              autocomplete="new-password">
+          </div>
+
+          <div class="card-item">
+            <p class="card-item-title">Repeat</p>
+            <input type="password" id="repeat" name="repeat">
+          </div>
+
+          <div class="card-status">
+            <p id="status"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+
+    document.getElementById('edit-profile-btn').addEventListener('click', async () => {
+      try {
+        const [first, last, password, repeat] = ['first','last','password','repeat'].map(id => document.getElementById(id).value)
+        statusEl.textContent = 'Saving...';
+
+        const res = await fetch('/profile/edit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            first: first,
+            last: last,
+            password: password,
+            repeat: repeat
+          })
+        });
+
+        const result = await res.json();
+        if (result.msg === 'Successfully updated profile') window.location.href = '/profile/show';
+        else statusEl.textContent = result.msg;
+      } catch (err) {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

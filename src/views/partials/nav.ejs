@@ -1,52 +1,61 @@
 <div class="nav">
-  <div class="nav-el">
-    <a href="/profile/edit/language">
+  <a href="/profile/edit/language">
+    <div class="nav-el">
       <% if (!currentUser.current_language) { %>
         <i id="unselected-lang-icon" class="fa-solid fa-earth-europe"></i>
       <% } else { %>
         <img src="/images/<%= currentUser.current_language %>.png" width="45">
       <% } %>
-    </a>
-  </div>
+    </div>
+  </a>
 
   <div class="nav-center">
-    <div class="nav-el">
-      <a href="/text">
+
+    <a href="/text">
+      <div class="nav-el">
         <i class="fa-solid fa-book-open"></i>
         <p>Text</p>
-      </a>
-    </div>
+      </div>
+    </a>
 
-    <div class="nav-el">
-      <a href="/decks">
+    <a href="/decks">
+      <div class="nav-el">
         <i class="fa-solid fa-bolt"></i>
         <p>Decks</p>
-      </a>
-    </div>
+      </div>
+    </a>
 
     <% if (currentUser.role==='admin' ) { %>
-    <div class="nav-el">
       <a href="/admin/users">
-        <i class="fa-solid fa-user-group"></i>
-        <p>Users</p>
+        <div class="nav-el">
+          <i class="fa-solid fa-user-group"></i>
+          <p>Users</p>
+        </div>
       </a>
-    </div>
     <% } %>
 
-    <div class="nav-el">
-      <a href="/profile/show">
-        <i class="fa-solid fa-user"></i>
+    <a href="/profile/show">
+      <div class="nav-el">
+        <i class="fa-regular fa-circle-user"></i>
         <p id="first-name">
           <%= currentUser.first %>
         </p>
-      </a>
-    </div>
+      </div>
+    </a>
+
   </div>
 
-  <div class="nav-el" id="logout">
+  <div class="nav-el" id="logout-btn">
     <i class="fa-solid fa-right-from-bracket"></i>
     <p>Logout</p>
   </div>
 </div>
 
-<script src="/js/logout.js"></script>
+<script>
+  const logoutEl = document.getElementById('logout-btn');
+
+  logoutEl.addEventListener('click', () => {
+    fetch('/logout?_method=DELETE', { method: 'post' })
+      .then(res => window.location = res.url);
+  });
+</script>

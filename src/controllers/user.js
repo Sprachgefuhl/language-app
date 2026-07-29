@@ -36,27 +36,27 @@ const createUser = async (req, res) => {
   const { first, last, email } = req.body;
   const user = await getUserByEmail(email.trim().toLowerCase());
 
-  if (user) return res.status(400).send({ msg: 'Email already exists' });
-  else {
-    const { data, error } = await supabase
-      .from('users')
-      .insert([{
-        first: first,
-        last: last,
-        current_language: null,
-        decks: null,
-        email: email.trim().toLowerCase(),
-        password: await bcrypt.hash('123', 12),
-        role: 'user'
-      }])
-      .select('*')
-      .single();
+  // empty fields
+  if (!first.length || !last.length || !email.length) return res.status(400).json({ msg: 'Missing required fields' });
 
-    if (error) throw new Error(error.message);
-    console.log(`👤 New user: ${data.first} ${data.last}`);
-  }
+  if (user) return res.status(400).json({ msg: 'Email already exists' });
 
-  res.redirect('/admin/users');
+  const { data, error } = await supabase
+    .from('users')
+    .insert([{
+      first: first,
+      last: last,
+      current_language: null,
+      role: 'user',
+      email: email.trim().toLowerCase(),
+      password: await bcrypt.hash(process.env.USER_PASS, 12)
+    }])
+    .select('*')
+    .single();
+
+  if (error) throw new Error(error.message);
+  console.log(`👤 New user: ${data.first} ${data.last}`);
+  return res.status(200).json({ msg: 'Successfully created user' });
 }
 
 const deleteUser = async () => {
