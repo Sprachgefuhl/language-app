@@ -35,19 +35,51 @@ const getArchive = async (userId, language, date) => {
   return data;
 }
 
+// const getDailyText = async (language, date) => {
+//   if (!language) return null;
+//   const scraperUrl = langData.find(lang => lang.name === language).scraperUrl;
+//   const url = `${scraperUrl}${date}`;
+//   const data = await fetch(url).then(res => res.text());
+
+//   const $ = cheerio.load(data);
+//   const text = $('.bodyTxt').text();
+//   const textCleaned = text.split(/\r?\n\s*\r?\n/)[1];
+//   const cleaned = textCleaned.replace(/\u00A0/g, ' ');
+
+//   return cleaned;
+// }
+
 const getDailyText = async (language, date) => {
   if (!language) return null;
-  const scraperUrl = langData.find(lang => lang.name === language).scraperUrl;
-  const url = `${scraperUrl}${date}`;
-  const data = await fetch(url).then(res => res.text());
+
+  const lang = langData.find(l => l.name === language);
+  if (!lang) {
+    console.error('Language not found:', language);
+    return null;
+  }
+
+  const url = `${lang.scraperUrl}${date}`;
+  console.log('Fetching:', url);
+
+  const res = await fetch(url, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Accept': 'text/html,application/xhtml+xml',
+      'Accept-Language': 'en-US,en;q=0.9',
+    },
+  });
+
+  console.log('Status:', res.status);
+  const data = await res.text();
+  console.log('HTML length:', data.length);
+  console.log('First 500 chars:', data.slice(0, 500));
 
   const $ = cheerio.load(data);
   const text = $('.bodyTxt').text();
-  const textCleaned = text.split(/\r?\n\s*\r?\n/)[1];
-  const cleaned = textCleaned.replace(/\u00A0/g, ' ');
+  console.log('bodyTxt length:', text.length);
 
-  return cleaned;
-}
+  // ...
+};
 
 const analyseDailyText = async (userId, language, date, content) => {
   console.log('Starting analysis');
