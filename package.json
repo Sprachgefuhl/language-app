@@ -8,7 +8,7 @@
     "dev": "concurrently \"npm run watch:scss\" \"npm run server\"",
     "server": "nodemon src/app.js",
     "watch:scss": "npx sass --watch src/scss:src/public/css --style=expanded",
-    "build:scss": "npx sass scss:src/public/css --style=compressed"
+    "build:scss": "npx sass src/scss:src/public/css --style=compressed"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,7 @@
   "devDependencies": {
     "concurrently": "^10.0.3",
     "nodemon": "^3.1.14",
-    "scss": "^0.2.4"
+    "sass": "^1.102.0"
   },
   "dependencies": {
     "@google/genai": "^2.12.0",
