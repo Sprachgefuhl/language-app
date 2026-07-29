@@ -8,9 +8,7 @@ const { standardizeDate, timeoutAsyncFunc, humanizeDate } = require('../utils/fu
 const langData = require('../utils/langData');
 
 router.get('/', authenticateToken, async (req, res) => {
-  console.log(req.currentUserId);
   const user = await getUserByID(req.currentUserId);
-  console.log(user);
   const decks = await getUserDecks(req.currentUserId);
   const date = req.query.date ? new Date(req.query.date) : new Date();
   const dateOfText = standardizeDate(date);
@@ -18,6 +16,9 @@ router.get('/', authenticateToken, async (req, res) => {
 
   if (user.current_language) dailyText = await getDailyText(user.current_language, dateOfText);
 
+  console.log(dailyText);
+
+  console.log('rendering');
   res.render('text/index', { currentUser: user, decks: decks, date: dateOfText, dailyText: dailyText });
 });
 
