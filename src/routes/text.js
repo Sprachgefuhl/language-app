@@ -8,8 +8,9 @@ const { standardizeDate, timeoutAsyncFunc, humanizeDate } = require('../utils/fu
 const langData = require('../utils/langData');
 
 router.get('/', authenticateToken, async (req, res) => {
-  console.log('getting text index page');
+  console.log(req.currentUserId);
   const user = await getUserByID(req.currentUserId);
+  console.log(user);
   const decks = await getUserDecks(req.currentUserId);
   const date = req.query.date ? new Date(req.query.date) : new Date();
   const dateOfText = standardizeDate(date);
