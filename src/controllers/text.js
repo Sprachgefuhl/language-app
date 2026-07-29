@@ -43,10 +43,10 @@ const getArchive = async (userId, language, date) => {
 
 //   const $ = cheerio.load(data);
 //   const text = $('.bodyTxt').text();
-//   const textCleaned = text.split(/\r?\n\s*\r?\n/)[1];
-//   const cleaned = textCleaned.replace(/\u00A0/g, ' ');
+  // const textCleaned = text.split(/\r?\n\s*\r?\n/)[1];
+  // const cleaned = textCleaned.replace(/\u00A0/g, ' ');
 
-//   return cleaned;
+  // return cleaned;
 // }
 
 const getDailyText = async (language, date) => {
@@ -59,8 +59,6 @@ const getDailyText = async (language, date) => {
   }
 
   const url = `${lang.scraperUrl}${date}`;
-  console.log('Fetching:', url);
-
   const res = await fetch(url, {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -69,16 +67,13 @@ const getDailyText = async (language, date) => {
     },
   });
 
-  console.log('Status:', res.status);
   const data = await res.text();
-  console.log('HTML length:', data.length);
-  console.log('First 500 chars:', data.slice(0, 500));
-
   const $ = cheerio.load(data);
   const text = $('.bodyTxt').text();
-  console.log('bodyTxt length:', text.length);
+  const textCleaned = text.split(/\r?\n\s*\r?\n/)[1];
+  const cleaned = textCleaned.replace(/\u00A0/g, ' ');
 
-  // ...
+  return cleaned;
 };
 
 const analyseDailyText = async (userId, language, date, content) => {

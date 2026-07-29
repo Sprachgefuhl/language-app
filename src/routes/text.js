@@ -16,7 +16,7 @@ router.get('/', authenticateToken, async (req, res) => {
 
   if (user.current_language) dailyText = await getDailyText(user.current_language, dateOfText);
 
-  // console.log(dailyText);
+  console.log(dailyText);
 
   res.render('text/index', { currentUser: user, decks: decks, date: dateOfText, dailyText: dailyText });
 });
