@@ -14,11 +14,10 @@ router.get('/', authenticateToken, async (req, res) => {
   const dateOfText = standardizeDate(date);
   let dailyText = '';
 
-  // if (user.current_language) dailyText = await getDailyText(user.current_language, dateOfText);
+  if (user.current_language) dailyText = await getDailyText(user.current_language, dateOfText);
 
   // console.log(dailyText);
 
-  console.log('rendering');
   res.render('text/index', { currentUser: user, decks: decks, date: dateOfText, dailyText: dailyText });
 });
 
