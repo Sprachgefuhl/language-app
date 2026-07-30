@@ -12,13 +12,14 @@ router.get('/', authenticateToken, async (req, res) => {
   const decks = await getUserDecks(req.currentUserId);
   const date = req.query.date ? new Date(req.query.date) : new Date();
   const dateOfText = standardizeDate(date);
-  let dailyText = '';
+  const archive = await getArchive(user.current_language, dateOfText);
 
-  if (user.current_language) dailyText = await getDailyText(user.current_language, dateOfText);
-
-  console.log(dailyText);
-
-  res.render('text/index', { currentUser: user, decks: decks, date: dateOfText, dailyText: dailyText });
+  res.render('text/index', {
+    currentUser: user,
+    decks: decks,
+    date: dateOfText,
+    dailyText: archive.length ? archive[0].content : ''
+  });
 });
 
 router.post('/translate', authenticateToken, async (req, res) => {
@@ -26,8 +27,6 @@ router.post('/translate', authenticateToken, async (req, res) => {
     const user = await getUserByID(req.currentUserId);
     const chunk = req.body.chunk;
     const dailyText = req.body.dailyText;
-    // const dailyText = await getDailyText(user.current_language, dateQuery);
-    // if (!dailyText) return res.status(404).json({ msg: 'Daily text not found' });
 
     // const analysis = await analyseDailyText(user.id, user.current_language, dateQuery, dailyText);
     // if (analysis == 'Error: Timeout') return res.status(504).json({ msg: 'Request timed out. Please try again' });

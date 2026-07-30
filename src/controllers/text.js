@@ -7,14 +7,12 @@ const { standardizeDate, timeoutPromise } = require('../utils/func');
 const { getUserByID } = require('./user');
 const langData = require('../utils/langData');
 
-const createArchive = async (userId, language, date, analysis, content) => {
+const createArchive = async (language, date, content) => {
   const { data, err } = await supabase
     .from('archives')
     .insert({
-      user_id: userId,
       language: language,
       date: date,
-      analysis: analysis,
       content: content,
     })
     .select()
@@ -23,31 +21,16 @@ const createArchive = async (userId, language, date, analysis, content) => {
   return data;
 }
 
-const getArchive = async (userId, language, date) => {
+const getArchive = async (language, date) => {
   const { data, err } = await supabase
     .from('archives')
     .select('*')
-    .eq('user_id', userId)
     .eq('language', language)
     .eq('date', date)
 
   if (err) console.log(err.message);
   return data;
 }
-
-// const getDailyText = async (language, date) => {
-//   if (!language) return null;
-//   const scraperUrl = langData.find(lang => lang.name === language).scraperUrl;
-//   const url = `${scraperUrl}${date}`;
-//   const data = await fetch(url).then(res => res.text());
-
-//   const $ = cheerio.load(data);
-//   const text = $('.bodyTxt').text();
-  // const textCleaned = text.split(/\r?\n\s*\r?\n/)[1];
-  // const cleaned = textCleaned.replace(/\u00A0/g, ' ');
-
-  // return cleaned;
-// }
 
 const getDailyText = async (language, date) => {
   if (!language) return null;

@@ -11,14 +11,14 @@ const langData = [
     name: 'German',
     scraperUrl: 'https://wol.jw.org/de/wol/h/r10/lp-x/',
   },
-  {
-    name: 'French',
-    scraperUrl: 'https://wol.jw.org/fr/wol/h/r30/lp-f/',
-  },
-  {
-    name: 'Italian',
-    scraperUrl: 'https://wol.jw.org/it/wol/h/r6/lp-i/',
-  },
+  // {
+  //   name: 'French',
+  //   scraperUrl: 'https://wol.jw.org/fr/wol/h/r30/lp-f/',
+  // },
+  // {
+  //   name: 'Italian',
+  //   scraperUrl: 'https://wol.jw.org/it/wol/h/r6/lp-i/',
+  // },
   {
     name: 'Dutch',
     scraperUrl: 'https://wol.jw.org/nl/wol/h/r18/lp-o/',

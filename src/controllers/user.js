@@ -46,7 +46,7 @@ const createUser = async (req, res) => {
     .insert([{
       first: first,
       last: last,
-      current_language: null,
+      current_language: '',
       role: 'user',
       email: email.trim().toLowerCase(),
       password: await bcrypt.hash(process.env.USER_PASS, 12)

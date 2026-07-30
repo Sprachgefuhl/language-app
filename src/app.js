@@ -13,6 +13,7 @@ const usersRouter = require('./routes/users');
 const profileRouter = require('./routes/profile');
 const textRouter = require('./routes/text');
 const decksRouter = require('./routes/decks');
+const { updateDailyTextArchives } = require('./controllers/admin');
 
 // middleware
 app.use(methodOverride('_method'));
@@ -30,4 +31,8 @@ app.use('/profile', profileRouter);
 app.use('/text', textRouter);
 app.use('/decks', decksRouter);
 
-app.listen(PORT, () => console.log(`🌐 Server running on Port: ${PORT}`));
+app.listen(PORT, async () => {
+  console.log(`🌐 Server running on Port: ${PORT}`);
+
+  // await updateDailyTextArchives({ future: true, depth: 20 });
+});
