@@ -2,7 +2,7 @@
 <body>
   <%- include('../partials/nav') %>
   <div class="daily-text">
-    <div class="main">
+    <div class="text-main">
       <div class="content">
         <div class="header">
           <h2 id="text-date">
@@ -11,7 +11,7 @@
             <i class="fa-solid fa-circle-chevron-right" id="day-after"></i>
           </h2>
         </div>
-        <div class="card">
+        <div class="text">
           <% if (!archive.length) { %>
             <p style="word-spacing: normal;">Daily text unavailable</p>
           <% } else { %>
@@ -24,6 +24,54 @@
             <% }); %>
 
           <% } %>
+        </div>
+
+        <div class="create-card">
+
+          <div class="open-overlay">
+            <i class="fa-solid fa-circle-plus"></i>
+          </div>
+
+          <div class="overlay hidden">
+            <div class="main"> 
+              <div class="card">
+                <div class="card-header">
+                  <i class="fa-regular fa-file card-header-icon"></i>
+                  <h1 class="card-header-title">Flashcard</h1>
+
+                  <div class="card-header-right" id="create-card-btn">
+                    <i class="fa-regular fa-square-plus card-header-right-icon"></i>
+                    <p>Create</p>
+                  </div>
+                </div>
+
+                <div class="card-content">
+                  <div class="card-item">
+                    <p class="card-item-title">Front</p>
+                    <input type="text" id="front" name="front">
+                  </div>
+
+                  <div class="card-item">
+                    <p class="card-item-title">Back</p>
+                    <input type="text" id="back" name="back">
+                  </div>
+
+                  <div class="card-item">
+                    <p class="card-item-title">Deck</p>
+                    <select name="deck" id="deck">
+                      <% decks.forEach(deck => { %>
+                        <option value="<%= deck.id %>"><%= deck.name %></option>
+                      <% }); %>
+                    </select>
+                  </div>
+
+                  <div class="card-status">
+                    <p id="status"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

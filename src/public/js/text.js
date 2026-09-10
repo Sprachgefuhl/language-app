@@ -1,3 +1,5 @@
+const statusEl = document.getElementById('status');
+const overlayEl = document.querySelector('.overlay');
 const textDate = document.getElementById('text-date').textContent.trim();
 const beforeIcon = document.getElementById('day-before');
 const afterIcon = document.getElementById('day-after');
@@ -36,6 +38,40 @@ alignmentEls.forEach(el => {
       opened.push(el.id);
     }
   });
+});
+
+document.getElementById('create-card-btn').addEventListener('click', async () => {
+  try {
+    const frontEl = document.getElementById('front');
+    const backEl = document.getElementById('back');
+    const deckId = document.getElementById('deck').value;
+
+    statusEl.textContent = 'Creating...';
+    const res = await fetch(`/decks/${deckId}/create-card`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        front: frontEl.value.trim(),
+        back: backEl.value.trim()
+      })
+    });
+
+    const result = await res.json();
+    if (result.msg === 'Card created') overlayEl.classList.add('hidden');
+    else statusEl.textContent = result.msg;
+  } catch (err) {
+    console.error(err);
+    alert('Something went wrong. Please try again.');
+  }
+});
+
+document.querySelector('.open-overlay').addEventListener('click', () => {
+  overlayEl.classList.remove('hidden');
+  overlayEl.addEventListener('click', () => {
+    console.log('hi')
+  })
 });
 
 beforeIcon.addEventListener('click', () => jumpDate(true));

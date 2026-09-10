@@ -56,15 +56,19 @@ const countDueCardsPerDeck = async (decks) => {
 
 // CARDS
 const createCard = async (req, res) => {
-  // const user = await getUserByID(req.currentUserId);
   const deckId = parseInt(req.params.id);
   const deck = await getDeck(deckId);
+  const front = req.body.front;
+  const back = req.body.back;
+
+  // empty fields
+  if (!front.length || !back.length) return res.status(400).json({ msg: 'Empty fields' });
 
   deck.cards.push({
     id: generateToken(),
     due: generateNewDueDate(0),
-    back: req.body.back,
-    front: req.body.front,
+    front: front,
+    back: back,
     easiness: 2.5,
     interval: 0,
     successes: 0
@@ -77,8 +81,9 @@ const createCard = async (req, res) => {
 
   if (error) throw new Error(error.message);
 
-  res.status(200).json({ msg: 'created' });
+  res.status(200).json({ msg: 'Card created' });
 }
+
 const deleteCard = async (req, res) => {
   const cardId = req.params.cardId;
   console.log(cardId)
@@ -105,7 +110,6 @@ const deleteCard = async (req, res) => {
 
   // res.status(200).json({ msg: 'created' });
 }
-
 
 const getDueCards = async (cards) => {
   if (!cards.length) return [];

@@ -2,7 +2,7 @@
 @import '../components/mixins';
 
 .daily-text {
-  .main {
+  .text-main {
     display: flex;
     justify-content: center;
     margin-top: 50px;
@@ -30,7 +30,7 @@
     }
   }
 
-  .card {
+  .text {
     max-width: 800px;
     max-height: 500px;
     display: flex;
@@ -67,7 +67,7 @@
 
   // Tablet
   @media (max-width: $bp-tablet) {
-    .main {
+    .text-main {
       margin-top: 30px;
     }
 
@@ -88,7 +88,7 @@
       }
     }
 
-    .card {
+    .text {
       font-size: 18px;
     }
 
@@ -105,7 +105,7 @@
 
   // Mobile
   @media (max-width: $bp-mobile) {
-    .main {
+    .text-main {
       margin-top: 15px;
     }
 
@@ -113,7 +113,7 @@
       align-items: center;
     }
 
-    .card {
+    .text {
       font-size: 16px;
     }
 
