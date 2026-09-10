@@ -16,14 +16,6 @@ const standardizeDate = (date) => {
   return `${year}/${month}/${day}`;
 }
 
-const humanizeDate = (date) => {
-  const dateObj = new Date(date);
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const month = months[dateObj.getMonth()];
-  const day = dateObj.getDate();
-  return `${month} ${day}`;
-}
-
 function timeoutPromise(promise, ms) {
   let timeoutId;
   const timeout = new Promise((_, reject) => {
@@ -35,4 +27,4 @@ function timeoutPromise(promise, ms) {
   });
 }
 
-module.exports = { hash, generateToken, standardizeDate, humanizeDate, timeoutPromise };
+module.exports = { hash, generateToken, standardizeDate, timeoutPromise };

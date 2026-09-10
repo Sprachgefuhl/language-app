@@ -804,20 +804,16 @@ input {
 .daily-text .main {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: calc(90dvh - 115px);
+  margin-top: 50px;
 }
 .daily-text .content {
   display: flex;
-  width: 100%;
-  height: 100%;
-  margin: 30px;
+  flex-direction: column;
 }
 .daily-text .header {
   display: flex;
-  align-items: center;
-  margin: 0 15px;
-  padding: 10px 30px;
+  margin: 0 30px;
+  padding: 10px 25px;
   color: #F4F5FA;
 }
 .daily-text .header i {
@@ -828,117 +824,44 @@ input {
 .daily-text .header i:hover {
   color: #A8ABB5;
 }
-.daily-text .text {
-  flex: 5;
-}
-.daily-text .translate {
-  flex: 2;
-}
 .daily-text .card {
-  margin: 0 15px;
-  padding: 20px 30px;
-  min-height: 375px;
-  max-height: 600px;
-  user-select: none;
+  max-width: 800px;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px;
+  padding: 20px 25px;
   overflow-y: auto;
   background-color: #111210;
   border: 2px solid #222422;
   border-radius: 15px;
   color: #F4F5FA;
-  font-size: 24px;
-  line-height: 2;
-  word-spacing: -1ch;
+  font-size: 20px;
   box-shadow: 10px 20px 20px hsla(0, 0%, 0%, 0.2);
 }
-.daily-text .text-card {
-  height: 100%;
-}
-.daily-text .translate-card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 20px 20px 0 20px;
-  user-select: text;
-  font-size: 20px;
-  line-height: 1.7;
-  word-spacing: normal;
-}
-.daily-text .translate-card input {
-  padding: 5px 0;
-  background: none;
-  border: none;
-  outline: none;
-  font-style: italic;
-  font-size: 20px;
-  color: #F4F5FA;
-}
-.daily-text .translate-card-header {
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  opacity: 0.6;
-}
-.daily-text .translate-card-chunk, .daily-text .translate-card-result {
-  flex: 2;
-  overflow-y: auto;
-  border-bottom: 2px solid #222422;
-}
-.daily-text .translate-card-result {
-  margin-top: 10px;
-}
-.daily-text .translate-card-flashcard {
-  flex: 1;
+.daily-text .alignment {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 20px;
+  width: fit-content;
+  padding-bottom: 8px;
   cursor: pointer;
+  transition: 0.2s;
 }
-.daily-text .translate-card-flashcard i {
-  font-size: 26px;
-}
-.daily-text .translate-card-flashcard .select-deck {
-  display: none;
-}
-.daily-text .translate-card-flashcard #select-deck {
-  padding: 5px 10px;
-  background: none;
-  color: #F4F5FA;
+.daily-text .alignment .eng {
+  color: #FB923C;
   font-size: 16px;
-  border: none;
-}
-.daily-text .translate-card #selected, .daily-text .translate-card #result {
   font-style: italic;
 }
-.daily-text .word {
-  padding: 5px 4px;
-  cursor: pointer;
-}
-.daily-text .word:hover {
-  border-bottom: 3px solid #60A5FA;
-}
-.daily-text .selected {
-  background-color: #60A5FA;
-  border-bottom: 3px solid #60A5FA;
+.daily-text .alignment .target {
+  font-size: 22px;
 }
 @media (max-width: 900px) {
   .daily-text .main {
-    min-height: calc(100dvh - 72px);
-    align-items: flex-start;
-  }
-  .daily-text .content {
-    flex-direction: column;
-    margin: 16px;
-    gap: 20px;
-  }
-  .daily-text .text,
-  .daily-text .translate {
-    flex: none;
-    width: 100%;
+    margin-top: 30px;
   }
   .daily-text .header {
+    justify-content: center;
     margin: 0 0 8px;
     padding: 8px 12px;
   }
@@ -952,55 +875,36 @@ input {
     font-size: 22px;
   }
   .daily-text .card {
-    margin: 0;
-    padding: 16px 18px;
-    max-height: 400px;
-    height: 100%;
     font-size: 18px;
-    line-height: 2.1;
-    border-radius: 12px;
   }
-  .daily-text .translate-card {
-    min-height: 200px;
+  .daily-text .alignment {
+    padding-bottom: 8px;
+  }
+  .daily-text .alignment .eng {
+    font-size: 14px;
+  }
+  .daily-text .alignment .target {
+    font-size: 20px;
   }
 }
 @media (max-width: 600px) {
+  .daily-text .main {
+    margin-top: 15px;
+  }
   .daily-text .content {
-    margin: 12px;
-    gap: 16px;
+    align-items: center;
   }
   .daily-text .card {
-    max-height: 600px;
-    padding: 14px 14px;
-    font-size: 16px;
-    line-height: 2.4;
-  }
-  .daily-text .text-card {
-    height: 50dvh;
-  }
-  .daily-text .translate-card {
-    padding-bottom: 0;
-    height: 25dvh;
-    line-height: 1.5;
-  }
-  .daily-text .translate-card input {
     font-size: 16px;
   }
-  .daily-text .translate-card-header {
-    font-size: 14px;
+  .daily-text .alignment {
+    padding-bottom: 6px;
   }
-  .daily-text .translate-card-flashcard {
-    display: flex;
+  .daily-text .alignment .eng {
+    font-size: 12px;
   }
-  .daily-text .header {
-    justify-content: center;
-    padding: 6px 8px;
-  }
-  .daily-text .header h2 {
-    font-size: 18px;
-  }
-  .daily-text .header i {
-    font-size: 20px;
+  .daily-text .alignment .target {
+    font-size: 16px;
   }
 }
 
@@ -1392,17 +1296,236 @@ input {
   flex: 1;
 }
 
+.show .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  min-height: 80dvh;
+}
+.show .card {
+  margin: 0 30px;
+  width: 100%;
+  max-width: 475px;
+  max-height: 425px;
+  min-height: 375px;
+  display: flex;
+  flex-direction: column;
+  background-color: #111210;
+  border: 2px solid #222422;
+  border-radius: 15px;
+  color: #F4F5FA;
+  box-shadow: 10px 20px 20px hsla(0, 0%, 0%, 0.2);
+}
+.show .card a {
+  color: #F4F5FA;
+  text-decoration: none;
+}
+.show .card-header i {
+  color: #F4F5FA;
+  font-size: 20px;
+}
+.show .card-header {
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #222422;
+}
+.show .card-header-title {
+  padding-left: 10px;
+  font-size: 24px;
+  font-weight: 500;
+}
+.show .card-header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.show .card-header-right-icon {
+  padding-right: 10px;
+  font-size: 18px;
+}
+.show .card-content {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  overflow-y: auto;
+}
+.show .card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 2px solid #222422;
+}
+.show .card-item-title {
+  color: #A8ABB5;
+}
+.show .card-item input {
+  background: none;
+  border: none;
+  outline: none;
+  text-align: right;
+  color: #F4F5FA;
+  font-size: 20px;
+}
+.show .card-status {
+  padding: 20px 0;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .show .main {
+    align-items: flex-start;
+  }
+}
 @media (max-width: 600px) {
-  .decks .card-header .card-header-right-icon {
+  .show .card {
+    margin: 0 12px;
+    min-height: 325px;
+    max-height: 375px;
+    font-size: 16px;
+  }
+  .show .card-header {
+    padding: 10px 14px;
+  }
+  .show .card-header-title {
+    font-size: 18px;
+  }
+  .show .card-content {
+    padding: 0 14px;
+  }
+  .show .card-item input {
+    font-size: 16px;
+  }
+}
+.show #card-count {
+  padding-right: 12px;
+  color: #60A5FA;
+}
+.show .delete-card {
+  padding-left: 6px;
+}
+.show .delete-card i:hover {
+  color: #F87171;
+}
+
+.edit .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  min-height: 80dvh;
+}
+.edit .card {
+  margin: 0 30px;
+  width: 100%;
+  max-width: 475px;
+  max-height: 425px;
+  min-height: 375px;
+  display: flex;
+  flex-direction: column;
+  background-color: #111210;
+  border: 2px solid #222422;
+  border-radius: 15px;
+  color: #F4F5FA;
+  box-shadow: 10px 20px 20px hsla(0, 0%, 0%, 0.2);
+}
+.edit .card a {
+  color: #F4F5FA;
+  text-decoration: none;
+}
+.edit .card-header i {
+  color: #F4F5FA;
+  font-size: 20px;
+}
+.edit .card-header {
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #222422;
+}
+.edit .card-header-title {
+  padding-left: 10px;
+  font-size: 24px;
+  font-weight: 500;
+}
+.edit .card-header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.edit .card-header-right-icon {
+  padding-right: 10px;
+  font-size: 18px;
+}
+.edit .card-content {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  overflow-y: auto;
+}
+.edit .card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 2px solid #222422;
+}
+.edit .card-item-title {
+  color: #A8ABB5;
+}
+.edit .card-item input {
+  background: none;
+  border: none;
+  outline: none;
+  text-align: right;
+  color: #F4F5FA;
+  font-size: 20px;
+}
+.edit .card-status {
+  padding: 20px 0;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .edit .main {
+    align-items: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .edit .card {
+    margin: 0 12px;
+    min-height: 325px;
+    max-height: 375px;
+    font-size: 16px;
+  }
+  .edit .card-header {
+    padding: 10px 14px;
+  }
+  .edit .card-header-title {
+    font-size: 18px;
+  }
+  .edit .card-content {
+    padding: 0 14px;
+  }
+  .edit .card-item input {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .decks .card-header .card-header-right-icon, .review .card-header .card-header-right-icon, .show .card-header .card-header-right-icon {
     font-size: 16px;
   }
   .decks .card-item-right {
     align-items: center;
   }
   .decks .card-item-right #review-count {
-    font-size: 16px;
-  }
-  .review .card-header .card-header-right-icon {
     font-size: 16px;
   }
   .review .flashcard-top-header {

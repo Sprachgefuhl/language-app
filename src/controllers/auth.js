@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { getUserByEmail } = require('./user');
-const { generateAccessToken, verifyAccessToken } = require('../utils/jwt');
+const { generateAccessToken } = require('../utils/jwt');
 
 const loginUser = async (req, res, next) => {
   const formEmail = req.body.email.toLowerCase().trim();

@@ -35,7 +35,7 @@
   }
 
   #review-count {
-    color: $blue
+    color: $blue;
   }
 
   .flashcard {
@@ -98,12 +98,35 @@
   }
 }
 
+.show {
+  @include centered-card;
+
+  #card-count {
+    padding-right: 12px;
+    color: $blue;
+  }
+
+  .delete-card {
+    padding-left: 6px;
+    i:hover {
+      color: $red;
+    }
+  }
+}
+
+.edit {
+  @include centered-card;
+}
+
 // Mobile
 @media (max-width: $bp-mobile) {
-  .decks {
+  .decks, .review, .show {
     .card-header .card-header-right-icon {
       font-size: 16px;
     }
+  }
+
+  .decks {
     .card-item-right {
       align-items: center;
       #review-count {
@@ -113,10 +136,6 @@
   }
   
   .review {
-    .card-header .card-header-right-icon {
-      font-size: 16px;
-    }
-
     .flashcard {
       &-top {
         &-header {

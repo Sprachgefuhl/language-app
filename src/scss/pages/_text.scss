@@ -5,22 +5,18 @@
   .main {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: calc(90dvh - 115px);
+    margin-top: 50px;
   }
 
   .content {
     display: flex;
-    width: 100%;
-    height: 100%;
-    margin: 30px;
+    flex-direction: column;
   }
 
   .header {
     display: flex;
-    align-items: center;
-    margin: 0 15px;
-    padding: 10px 30px;
+    margin: 0 30px;
+    padding: 10px 25px;
     color: $text-primary;
 
     i {
@@ -34,137 +30,49 @@
     }
   }
 
-  .text {
-    flex: 5;
-  }
-
-  .translate {
-    flex: 2;
-  }
-
   .card {
-    margin: 0 15px;
-    padding: 20px 30px;
-    min-height: 375px;
-    max-height: 600px;
-    user-select: none;
+    max-width: 800px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 30px;
+    padding: 20px 25px;
     overflow-y: auto;
     background-color: $bg-secondary;
     border: 2px solid $colour-border;
     border-radius: 15px;
     color: $text-primary;
-    font-size: 24px;
-    line-height: 2;
-    word-spacing: -1ch;
+    font-size: 20px;
     box-shadow: 10.0px 20.0px 20.0px hsl(0deg 0% 0% / 0.20);
   }
 
-  .text-card {
-    height: 100%;
-  }
-
-  .translate-card {
-    height: 100%;
+  .alignment {
     display: flex;
     flex-direction: column;
-    padding: 20px 20px 0 20px;
-    user-select: text;
-    font-size: 20px;
-    line-height: 1.7;
-    word-spacing: normal;
-
-    input {
-      padding: 5px 0;
-      background: none;
-      border: none;
-      outline: none;
-      font-style: italic;
-      font-size: 20px;
-      color: $text-primary;
-    }
-
-    &-header {
-      font-size: 16px;
-      font-weight: $font-bold;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      opacity: 0.6;
-    }
-
-    &-chunk, &-result {
-      flex: 2;
-      overflow-y: auto;
-      border-bottom: 2px solid $colour-border;
-    }
-
-    &-result {
-      margin-top: 10px;
-    }
-
-    &-flashcard {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      cursor: pointer;
-
-      i {
-        font-size: 26px;
-      }
-
-      .select-deck {
-        display: none;
-      }
-
-      #select-deck {
-        padding: 5px 10px;
-        background: none;
-        color: $text-primary;
-        font-size: 16px;
-        border: none;
-      }
-    }
-
-    #selected, #result {
-      font-style: italic;
-    }
-  }
-
-  .word {
-    padding: 5px 4px;
+    justify-content: center;
+    width: fit-content;
+    padding-bottom: 8px;
     cursor: pointer;
-    &:hover {
-      border-bottom: 3px solid $blue;
-    }
-  }
+    transition: 0.2s;
 
-  .selected {
-    background-color: $blue;
-    border-bottom: 3px solid $blue;
+    .eng {
+      color: $orange;
+      font-size: 16px;
+      font-style: italic;
+    }
+    .target {
+      font-size: 22px;
+    }
   }
 
   // Tablet
   @media (max-width: $bp-tablet) {
     .main {
-      min-height: calc(100dvh - 72px);
-      align-items: flex-start;
-    }
-
-    .content {
-      flex-direction: column;
-      margin: 16px;
-      gap: 20px;
-    }
-
-    .text,
-    .translate {
-      flex: none;
-      width: 100%;
+      margin-top: 30px;
     }
 
     .header {
+      justify-content: center;
       margin: 0 0 8px;
       padding: 8px 12px;
 
@@ -181,66 +89,42 @@
     }
 
     .card {
-      margin: 0;
-      padding: 16px 18px;
-      max-height: 400px;
-      height: 100%;
       font-size: 18px;
-      line-height: 2.1;
-      border-radius: 12px;
     }
 
-    .translate-card {
-      min-height: 200px;
+    .alignment {
+      padding-bottom: 8px;
+      .eng {
+        font-size: 14px;
+      }
+      .target {
+        font-size: 20px;
+      }
     }
   }
 
   // Mobile
   @media (max-width: $bp-mobile) {
+    .main {
+      margin-top: 15px;
+    }
+
     .content {
-      margin: 12px;
-      gap: 16px;
+      align-items: center;
     }
 
     .card {
-      max-height: 600px;
-      padding: 14px 14px;
       font-size: 16px;
-      line-height: 2.4;
     }
 
-    .text-card {
-      height: 50dvh;
-    }
+    .alignment {
+      padding-bottom: 6px;
 
-    .translate-card {
-      padding-bottom: 0;
-      height: 25dvh;
-      line-height: 1.5;
-
-      input {
+      .eng {
+        font-size: 12px;
+      }
+      .target {
         font-size: 16px;
-      }
-
-      &-header {
-        font-size: 14px;
-      }
-
-      &-flashcard {
-        display: flex;
-      }
-    }
-
-    .header {
-      justify-content: center;
-      padding: 6px 8px;
-
-      h2 {
-        font-size: 18px;
-      }
-
-      i {
-        font-size: 20px;
       }
     }
   }

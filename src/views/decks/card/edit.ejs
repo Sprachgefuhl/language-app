@@ -1,0 +1,68 @@
+<%- include('../../partials/head') %>
+<body>
+  <%- include('../../partials/nav') %>
+  <div class="edit">
+    <div class="main">
+      <div class="card">
+        
+        <div class="card-header" data-deckid="<%= deck.id %>" data-cardid="<%= card.id %>">
+          <i class="fa-regular fa-file-lines"></i>
+          <h1 class="card-header-title">Edit</h1>
+
+          <div class="card-header-right" id="edit-card-btn">
+            <i class="fa-regular fa-floppy-disk card-header-right-icon"></i>
+            <p>Save</p>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <div class="card-item">
+            <p class="card-item-title">Front</p>
+            <input type="text" id="front" name="front" value="<%= card.front %>" required>
+          </div>
+
+          <div class="card-item">
+            <p class="card-item-title">Back</p>
+            <input type="text" id="back" name="back" value="<%= card.back %>" required>
+          </div>
+
+          <div class="card-status">
+            <p id="status"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const deckId = document.querySelector('.card-header').dataset.deckid;
+    const cardId = document.querySelector('.card-header').dataset.cardid;
+
+    document.getElementById('edit-card-btn').addEventListener('click', async () => {
+      try {
+        const [front, back] = ['front', 'back'].map(id => document.getElementById(id).value)
+        statusEl.textContent = 'Saving...';
+
+        const res = await fetch(``, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            front: front,
+            back: back
+          })
+        });
+
+        const result = await res.json();
+        if (result.msg === 'Card updated') window.location.href = `/decks/show/${deckId}`;
+        else statusEl.textContent = result.msg;
+      } catch (err) {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

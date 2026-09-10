@@ -26,7 +26,9 @@
                   <p id="review-count">
                     <%= dueCardsPerDeck.find(item => item.deckId === deck.id).totalCardsDue; %>
                   </p>
-                  <i class="fa-solid fa-pen-to-square"></i>
+                  <a href="/decks/show/<%= deck.id %>">
+                    <i class="fa-regular fa-folder-open"></i>
+                  </a>
                 </div>
               </div>
             <% }) %>

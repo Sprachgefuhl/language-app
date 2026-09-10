@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middleware/auth');
 const { getUserByID } = require('../controllers/user');
-const { createDeck, getUserDecks, getDeck, countDueCardsPerDeck, getDueCards, handleCardReview, getRandomCard, createCard } = require('../controllers/decks');
+const { createDeck, getUserDecks, getDeck, countDueCardsPerDeck, getDueCards, handleCardReview, getRandomCard, createCard, handleCardEdit } = require('../controllers/decks');
 
 router.get('/', authenticateToken, async (req, res) => {
   const user = await getUserByID(req.currentUserId);
@@ -27,5 +27,22 @@ router.get('/review/:id', authenticateToken, async (req, res) => {
 });
 
 router.post('/review/:id', authenticateToken, handleCardReview);
+
+router.get('/show/:id', authenticateToken, async (req, res) => {
+  const user = await getUserByID(req.currentUserId);
+  const deck = await getDeck(req.params.id);
+
+  res.render('decks/show', { currentUser: user, deck: deck });
+});
+
+router.get('/:deckId/card/edit/:cardId', authenticateToken, async (req, res) => {
+  const user = await getUserByID(req.currentUserId);
+  const deck = await getDeck(req.params.deckId);
+  const card = deck.cards.filter(card => card.id === req.params.cardId);
+
+  res.render('decks/card/edit', { currentUser: user, deck: deck, card: card[0] });
+});
+
+router.post('/:deckId/card/edit/:cardId', authenticateToken, handleCardEdit);
 
 module.exports = router;

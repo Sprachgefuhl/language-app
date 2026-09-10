@@ -56,7 +56,7 @@ const countDueCardsPerDeck = async (decks) => {
 
 // CARDS
 const createCard = async (req, res) => {
-  const user = await getUserByID(req.currentUserId);
+  // const user = await getUserByID(req.currentUserId);
   const deckId = parseInt(req.params.id);
   const deck = await getDeck(deckId);
 
@@ -79,6 +79,33 @@ const createCard = async (req, res) => {
 
   res.status(200).json({ msg: 'created' });
 }
+const deleteCard = async (req, res) => {
+  const cardId = req.params.cardId;
+  console.log(cardId)
+  // const user = await getUserByID(req.currentUserId);
+  // const deckId = parseInt(req.params.id);
+  // const deck = await getDeck(deckId);
+
+  // deck.cards.push({
+  //   id: generateToken(),
+  //   due: generateNewDueDate(0),
+  //   back: req.body.back,
+  //   front: req.body.front,
+  //   easiness: 2.5,
+  //   interval: 0,
+  //   successes: 0
+  // });
+
+  // const { error } = await supabase
+  //   .from('decks')
+  //   .update({ cards: deck.cards })
+  //   .eq('id', deckId)
+
+  // if (error) throw new Error(error.message);
+
+  // res.status(200).json({ msg: 'created' });
+}
+
 
 const getDueCards = async (cards) => {
   if (!cards.length) return [];
@@ -87,7 +114,7 @@ const getDueCards = async (cards) => {
   return due;
 }
 
-const updateCard = async (userId, deck, newCard) => {
+const updateCard = async (deck, newCard) => {
   const updatedCards = deck.cards.map(card => {
     if (card.id === newCard.id) {
       return newCard;
@@ -102,6 +129,17 @@ const updateCard = async (userId, deck, newCard) => {
     .eq('id', deck.id)
 
   if (error) throw new Error(error.message);
+}
+
+const handleCardEdit = async (req, res) => {
+  const { front, back } = req.body;
+  const deck = await getDeck (req.params.deckId);
+  const card = deck.cards.filter(card => card.id === req.params.cardId);
+  card[0].front = front;
+  card[0].back = back;
+
+  await updateCard(deck, card[0]);
+  res.status(200).json({ msg: 'Card updated' });
 }
 
 const handleCardReview = async (req, res) => {
@@ -120,7 +158,7 @@ const handleCardReview = async (req, res) => {
     card.due = generateNewDueDate(card.interval);
   }
 
-  await updateCard(req.currentUserId, deck, card);
+  await updateCard(deck, card);
   res.status(200).json({ msg: 'Card reviewed' });
 }
 
@@ -136,4 +174,4 @@ const getRandomCard = (cards) => {
   return cards[Math.floor(Math.random() * cards.length)];
 }
 
-module.exports = { createDeck, getDeck, getUserDecks, countDueCardsPerDeck, createCard, getDueCards, handleCardReview, getRandomCard }
+module.exports = { createDeck, getDeck, getUserDecks, countDueCardsPerDeck, createCard, deleteCard, getDueCards, handleCardEdit, handleCardReview, getRandomCard }

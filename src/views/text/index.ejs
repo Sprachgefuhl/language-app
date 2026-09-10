@@ -4,59 +4,26 @@
   <div class="daily-text">
     <div class="main">
       <div class="content">
-        <div class="text">
-          <div class="header">
-            <h2 id="text-date">
-              <i class="fa-solid fa-circle-chevron-left" id="day-before"></i>
-              <%= date %>
-              <i class="fa-solid fa-circle-chevron-right" id="day-after"></i>
-            </h2>
-          </div>
-          <div class="card text-card">
-            <% if (!dailyText.length) { %>
-              <p style="word-spacing: normal;">Daily text not available. Make sure you have set a language.</p>
-            <% } else { %>
-
-              <% dailyText.split(' ').forEach(word => { %>
-                <span class="word"><%= word %></span>
-              <% }); %>
-
-            <% } %>
-          </div>
+        <div class="header">
+          <h2 id="text-date">
+            <i class="fa-solid fa-circle-chevron-left" id="day-before"></i>
+            <%= date %>
+            <i class="fa-solid fa-circle-chevron-right" id="day-after"></i>
+          </h2>
         </div>
-        
-        <div class="translate">
-          <div class="header">
-            <h2 id="translate-title">Translate</h2>
-          </div>
-          <div class="card translate-card">
-            <div class="translate-card-chunk">
-              <p class="translate-card-header">Chunk</p>
-              <p id="selected"></p>
-            </div>
+        <div class="card">
+          <% if (!archive.length) { %>
+            <p style="word-spacing: normal;">Daily text unavailable</p>
+          <% } else { %>
 
-            <div class="translate-card-result">
-              <p class="translate-card-header">Translation</p>
-              <p id="result"></p>
-            </div>
-
-            <div class="translate-card-flashcard">
-              <i class="fa-solid fa-language" id="translate-btn"></i>
-
-              <div class="select-deck">
-                <% if (!decks.length) { %>
-                  <p>No decks</p>
-                <% } else { %>
-                  <select name="select-deck" id="select-deck">
-                    <% decks.forEach(deck => { %>
-                      <option value="<%= deck.id %>"><%= deck.name %></option>
-                    <% }); %>
-                  </select>
-                <% } %>
+            <% archive[0].alignments.forEach((alignment, i) => { %>
+              <div class="alignment" id="<%= i %>">
+                <span class="eng" style="display: none;"><%= alignment.eng %></span>
+                <span class="target"><%= alignment.target %></span>
               </div>
-            </div>
+            <% }); %>
 
-          </div>
+          <% } %>
         </div>
       </div>
     </div>
