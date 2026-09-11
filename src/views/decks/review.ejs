@@ -1,5 +1,12 @@
 <%- include('../partials/head') %>
 <body>
+  <audio id="sfx-correct" preload="auto">
+    <source src="/sfx/correct.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="sfx-incorrect" preload="auto">
+    <source src="/sfx/incorrect.mp3" type="audio/mpeg">
+  </audio>
+
   <%- include('../partials/nav') %>
   <div class="review">
     <div class="main">
@@ -49,15 +56,30 @@
     const deck = JSON.parse(flashcard.dataset.deck);
     const card = JSON.parse(flashcard.dataset.card);
 
+    const sfx = {
+      correct: document.getElementById('sfx-correct'), 
+      incorrect: document.getElementById('sfx-incorrect'), 
+    }
+
     content.textContent = card.front;
 
     async function handleAnswer(e) {
+      console.log(e.target.id)
       const result = e.target.id;
+      if (result === 'fail') {
+        sfx.incorrect.currentTime = 0;
+        sfx.incorrect.play();
+      } else if (result === 'success') {
+        sfx.correct.currentTime = 0;
+        sfx.correct.play();
+      }
 
       header.textContent = 'back';
       content.textContent = card.back;
       answerBtns[1].style.display = 'none';
       answerBtns[0].classList = 'fa-regular fa-circle-right';
+      answerBtns[0].id = '';
+      answerBtns[0].style.color = 'white';
       answerBtns[0].addEventListener('click', async () => fetchReview(result));
     }
 

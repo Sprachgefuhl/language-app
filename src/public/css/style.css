@@ -31,6 +31,11 @@ input {
   caret-color: #F4F5FA;
 }
 
+select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 @media (max-width: 600px) {
   body {
     font-size: 16px;
@@ -1673,6 +1678,14 @@ input {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+.create-card #deck {
+  padding: 5px 10px;
+  font-size: 16px;
+  color: #F4F5FA;
+  background: transparent;
+  border: 1px solid #222422;
+  border-radius: 8px;
 }
 
 /*# sourceMappingURL=style.css.map */

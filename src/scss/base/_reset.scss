@@ -33,6 +33,11 @@ input {
   caret-color: $text-primary;
 }
 
+select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 @media (max-width: $bp-mobile) {
   body {
     font-size: 16px;

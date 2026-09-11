@@ -6,6 +6,8 @@ const afterIcon = document.getElementById('day-after');
 const alignmentEls = [...document.querySelectorAll('.alignment')];
 let opened = [];
 
+const flashcardSFX = document.getElementById('sfx-flashcard');
+
 const standardizeDate = (date) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -59,7 +61,15 @@ document.getElementById('create-card-btn').addEventListener('click', async () =>
     });
 
     const result = await res.json();
-    if (result.msg === 'Card created') overlayEl.classList.add('hidden');
+    if (result.msg === 'Card created') {
+      // console.log(sfx);
+      flashcardSFX.currentTime = 0;
+      flashcardSFX.play();
+      statusEl.textContent = '';
+      frontEl.value = '';
+      backEl.value = '';
+      overlayEl.classList.add('hidden');
+    }
     else statusEl.textContent = result.msg;
   } catch (err) {
     console.error(err);
@@ -69,9 +79,12 @@ document.getElementById('create-card-btn').addEventListener('click', async () =>
 
 document.querySelector('.open-overlay').addEventListener('click', () => {
   overlayEl.classList.remove('hidden');
-  overlayEl.addEventListener('click', () => {
-    console.log('hi')
-  })
+
+  overlayEl.addEventListener('click', (e) => {
+    const cardEl = document.querySelector('.card');
+    if (!cardEl.contains(e.target))
+    overlayEl.classList.add('hidden');
+  });
 });
 
 beforeIcon.addEventListener('click', () => jumpDate(true));

@@ -34,5 +34,5 @@ app.use('/decks', decksRouter);
 app.listen(PORT, async () => {
   console.log(`🌐 Server running on Port: ${PORT}`);
 
-  await updateDailyTextArchives({ future: true, depth: 2 });
+  // await updateDailyTextArchives({ future: true, depth: 1 });
 });
