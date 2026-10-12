@@ -36,22 +36,16 @@
             <p class="card-item-title">Repeat</p>
             <input type="password" id="repeat" name="repeat">
           </div>
-
-          <div class="card-status">
-            <p id="status"></p>
-          </div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    const statusEl = document.getElementById('status');
-
     document.getElementById('edit-profile-btn').addEventListener('click', async () => {
       try {
         const [first, last, password, repeat] = ['first','last','password','repeat'].map(id => document.getElementById(id).value)
-        statusEl.textContent = 'Saving...';
+        showStatus('Updating...', 'info');
 
         const res = await fetch('/profile/edit', {
           method: 'POST',
@@ -67,8 +61,11 @@
         });
 
         const result = await res.json();
-        if (result.msg === 'Successfully updated profile') window.location.href = '/profile/show';
-        else statusEl.textContent = result.msg;
+        if (result.msg === 'Successfully updated') {
+          showStatus(result.msg, 'success');
+          window.location.href = '/profile/show';
+        }
+        else showStatus(result.msg, 'error');
       } catch (err) {
         console.error(err);
         alert('Something went wrong. Please try again.');

@@ -30,7 +30,7 @@ const updateProfile = async (req, res) => {
   console.log(`👤 ${user.first} ${user.last}'s profile has been updated`);
 
   // res.redirect('/profile/show');
-  res.status(200).json({ msg: 'Successfully updated profile' });
+  res.status(200).json({ msg: 'Successfully updated' });
 }
 
 const updateLanguage = async (req, res) => {

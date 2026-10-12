@@ -76,16 +76,20 @@
       border-top: 2px solid $colour-border;
       font-size: 30px;
 
-      .answer:hover {
-        cursor: pointer;
+      .answer {
+        width: 25%;
+        padding: 12px;
+        font-size: 22px;
+        border-radius: 3px;
+        cursor: pointer; 
       }
 
-      #success {
-        color: $green;
+      .success {
+        background: $green;
       }
 
-      #fail {
-        color: $red;
+      .fail {
+        background: $red;
       }
     }
   }
@@ -143,12 +147,12 @@
         }
 
         &-body {
-          font-size: 18px; 
+          font-size: 20px; 
         }
       }
 
       &-bottom {
-        font-size: 25px;
+        // font-size: 20px;
       }
     }
   }

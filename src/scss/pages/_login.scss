@@ -5,11 +5,12 @@
   @include centered-card;
 
   .main {
-    min-height: 100dvh;
+    align-items: center;
+    // min-height: 100dvh;
   }
 
   .card {
-    min-height: 300px;
+    // min-height: 300px;
   }
 
   .card-content .card-item {

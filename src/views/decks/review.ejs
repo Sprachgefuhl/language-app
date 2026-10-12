@@ -1,12 +1,5 @@
 <%- include('../partials/head') %>
 <body>
-  <audio id="sfx-correct" preload="auto">
-    <source src="/sfx/correct.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="sfx-incorrect" preload="auto">
-    <source src="/sfx/incorrect.mp3" type="audio/mpeg">
-  </audio>
-
   <%- include('../partials/nav') %>
   <div class="review">
     <div class="main">
@@ -30,17 +23,20 @@
             </div>
           <% } else { %>
             <div class="flashcard" data-deck="<%= JSON.stringify(deck) %>" data-card="<%= JSON.stringify(card) %>">
+              <div class="flashcard-top">
+                <span class="flashcard-top-header">front</span>
+                <p class="flashcard-top-body" id="front"></p>
+              </div>
 
-            <div class="flashcard-top">
-              <span class="flashcard-top-header">front</span>
-              <p class="flashcard-top-body" id="front"></p>
-            </div>
+              <div class="flashcard-bottom">
+                <div class="answer success">
+                  <i class="fa-regular fa-circle-check" id="success"></i>
+                </div>
 
-            <div class="flashcard-bottom">
-              <i class="fa-regular fa-circle-check answer" id="success"></i>
-              <i class="fa-regular fa-circle-xmark answer" id="fail"></i>
-            </div>
-
+                <div class="answer fail">
+                  <i class="fa-regular fa-circle-xmark" id="fail"></i>
+                </div>
+              </div>
             </div>
           <% } %>
         </div>
@@ -55,31 +51,19 @@
     const answerBtns = document.querySelectorAll('.answer');
     const deck = JSON.parse(flashcard.dataset.deck);
     const card = JSON.parse(flashcard.dataset.card);
-
-    const sfx = {
-      correct: document.getElementById('sfx-correct'), 
-      incorrect: document.getElementById('sfx-incorrect'), 
-    }
-
     content.textContent = card.front;
 
     async function handleAnswer(e) {
-      console.log(e.target.id)
-      const result = e.target.id;
-      if (result === 'fail') {
-        sfx.incorrect.currentTime = 0;
-        sfx.incorrect.play();
-      } else if (result === 'success') {
-        sfx.correct.currentTime = 0;
-        sfx.correct.play();
-      }
-
-      header.textContent = 'back';
+      // console.log(e.target.classList)
+      const result = e.target.classList[1];
+      header.textContent = '';
       content.textContent = card.back;
       answerBtns[1].style.display = 'none';
-      answerBtns[0].classList = 'fa-regular fa-circle-right';
-      answerBtns[0].id = '';
-      answerBtns[0].style.color = 'white';
+      answerBtns[0].style.background = '#60A5FA';
+      let newBtn = answerBtns[0].children[0];
+      newBtn.classList = 'fa-regular fa-circle-right';
+      newBtn.id = '';
+      
       answerBtns[0].addEventListener('click', async () => fetchReview(result));
     }
 

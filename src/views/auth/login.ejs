@@ -24,25 +24,17 @@
             <i class="fa-solid fa-lock card-item-title"></i>
             <input type="password" name="password" id="password" placeholder="password" autocomplete="off">
           </div>
-
-          <div class="card-status">
-            <p id="status"></p>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    const statusEl = document.getElementById('status');
-    const iconStatusEl = document.getElementById('icon-status');
-
     document.getElementById('login-btn').addEventListener('click', async () => {
       const [email, password] = ['email', 'password'].map(id => document.getElementById(id).value)
 
       try {
-        statusEl.textContent = 'Logging in...';
+        showStatus('Connecting...', 'info');
 
         const res = await fetch('/login/auth', {
           method: 'POST',
@@ -54,10 +46,10 @@
 
         const result = await res.json();
         if (result.msg === 'Successfully logged in') {
-          iconStatusEl.classList = 'fa-solid fa-lock-open';
-          return window.location.reload();
+          window.location.reload();
+          showStatus('Welcome', 'success');
         } else {
-          statusEl.textContent = result.msg;
+          showStatus(result.msg, 'error');
         }
       } catch (err) {
         console.error(err);

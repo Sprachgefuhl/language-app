@@ -129,6 +129,27 @@ select {
   }
 }
 
+.status-con {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  width: 250px;
+  color: #F4F5FA;
+  background-color: #1A1A1A;
+  border: 2px solid #222422;
+  border-radius: 5px;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+.status-con i {
+  padding-right: 18px;
+  color: #10B981;
+  font-size: 24px;
+}
 .login .main {
   display: flex;
   justify-content: center;
@@ -205,10 +226,6 @@ select {
   color: #F4F5FA;
   font-size: 20px;
 }
-.login .card-status {
-  padding: 20px 0;
-  text-align: center;
-}
 @media (max-width: 900px) {
   .login .main {
     align-items: flex-start;
@@ -235,10 +252,7 @@ select {
   }
 }
 .login .main {
-  min-height: 100dvh;
-}
-.login .card {
-  min-height: 300px;
+  align-items: center;
 }
 .login .card-content .card-item {
   justify-content: left;
@@ -323,10 +337,6 @@ select {
   text-align: right;
   color: #F4F5FA;
   font-size: 20px;
-}
-.show-profile .card-status {
-  padding: 20px 0;
-  text-align: center;
 }
 @media (max-width: 900px) {
   .show-profile .main {
@@ -434,10 +444,6 @@ select {
   color: #F4F5FA;
   font-size: 20px;
 }
-.edit-profile .card-status {
-  padding: 20px 0;
-  text-align: center;
-}
 @media (max-width: 900px) {
   .edit-profile .main {
     align-items: flex-start;
@@ -540,10 +546,6 @@ select {
   color: #F4F5FA;
   font-size: 20px;
 }
-.edit-lang .card-status {
-  padding: 20px 0;
-  text-align: center;
-}
 @media (max-width: 900px) {
   .edit-lang .main {
     align-items: flex-start;
@@ -575,6 +577,9 @@ select {
   justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
+}
+.edit-lang #lang-name {
+  text-align: center;
 }
 
 @media (max-width: 900px) {
@@ -669,10 +674,6 @@ select {
   text-align: right;
   color: #F4F5FA;
   font-size: 20px;
-}
-.users .card-status {
-  padding: 20px 0;
-  text-align: center;
 }
 @media (max-width: 900px) {
   .users .main {
@@ -775,10 +776,6 @@ select {
   text-align: right;
   color: #F4F5FA;
   font-size: 20px;
-}
-.create-user .card-status {
-  padding: 20px 0;
-  text-align: center;
 }
 @media (max-width: 900px) {
   .create-user .main {
@@ -989,10 +986,6 @@ select {
   color: #F4F5FA;
   font-size: 20px;
 }
-.decks .card-status {
-  padding: 20px 0;
-  text-align: center;
-}
 @media (max-width: 900px) {
   .decks .main {
     align-items: flex-start;
@@ -1106,10 +1099,6 @@ select {
   color: #F4F5FA;
   font-size: 20px;
 }
-.create .card-status {
-  padding: 20px 0;
-  text-align: center;
-}
 @media (max-width: 900px) {
   .create .main {
     align-items: flex-start;
@@ -1212,10 +1201,6 @@ select {
   color: #F4F5FA;
   font-size: 20px;
 }
-.review .card-status {
-  padding: 20px 0;
-  text-align: center;
-}
 @media (max-width: 900px) {
   .review .main {
     align-items: flex-start;
@@ -1285,14 +1270,18 @@ select {
   border-top: 2px solid #222422;
   font-size: 30px;
 }
-.review .flashcard-bottom .answer:hover {
+.review .flashcard-bottom .answer {
+  width: 25%;
+  padding: 12px;
+  font-size: 22px;
+  border-radius: 3px;
   cursor: pointer;
 }
-.review .flashcard-bottom #success {
-  color: #10B981;
+.review .flashcard-bottom .success {
+  background: #10B981;
 }
-.review .flashcard-bottom #fail {
-  color: #F87171;
+.review .flashcard-bottom .fail {
+  background: #F87171;
 }
 .review .nothing {
   display: flex;
@@ -1376,10 +1365,6 @@ select {
   text-align: right;
   color: #F4F5FA;
   font-size: 20px;
-}
-.show .card-status {
-  padding: 20px 0;
-  text-align: center;
 }
 @media (max-width: 900px) {
   .show .main {
@@ -1493,10 +1478,6 @@ select {
   color: #F4F5FA;
   font-size: 20px;
 }
-.edit .card-status {
-  padding: 20px 0;
-  text-align: center;
-}
 @media (max-width: 900px) {
   .edit .main {
     align-items: flex-start;
@@ -1537,10 +1518,7 @@ select {
     font-size: 12px;
   }
   .review .flashcard-top-body {
-    font-size: 18px;
-  }
-  .review .flashcard-bottom {
-    font-size: 25px;
+    font-size: 20px;
   }
 }
 .create-card .main {
@@ -1618,10 +1596,6 @@ select {
   text-align: right;
   color: #F4F5FA;
   font-size: 20px;
-}
-.create-card .card-status {
-  padding: 20px 0;
-  text-align: center;
 }
 @media (max-width: 900px) {
   .create-card .main {

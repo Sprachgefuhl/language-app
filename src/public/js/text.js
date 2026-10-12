@@ -6,8 +6,6 @@ const afterIcon = document.getElementById('day-after');
 const alignmentEls = [...document.querySelectorAll('.alignment')];
 let opened = [];
 
-const flashcardSFX = document.getElementById('sfx-flashcard');
-
 const standardizeDate = (date) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -48,7 +46,7 @@ document.getElementById('create-card-btn').addEventListener('click', async () =>
     const backEl = document.getElementById('back');
     const deckId = document.getElementById('deck').value;
 
-    statusEl.textContent = 'Creating...';
+    showStatus('Creating...', 'info');
     const res = await fetch(`/decks/${deckId}/create-card`, {
       method: 'POST',
       headers: {
@@ -62,15 +60,11 @@ document.getElementById('create-card-btn').addEventListener('click', async () =>
 
     const result = await res.json();
     if (result.msg === 'Card created') {
-      // console.log(sfx);
-      flashcardSFX.currentTime = 0;
-      flashcardSFX.play();
-      statusEl.textContent = '';
       frontEl.value = '';
       backEl.value = '';
       overlayEl.classList.add('hidden');
-    }
-    else statusEl.textContent = result.msg;
+      showStatus(result.msg, 'success');
+    } else showStatus(result.msg, 'error');
   } catch (err) {
     console.error(err);
     alert('Something went wrong. Please try again.');

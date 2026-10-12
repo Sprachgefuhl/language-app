@@ -1,0 +1,33 @@
+.status-con {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  width: 250px;
+  color: $text-primary;
+  background-color: $bg-primary;
+  border: 2px solid $colour-border;
+  border-radius: 5px;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+
+  i {
+    padding-right: 18px;
+    color: $green;
+    font-size: 24px;
+  }
+
+
+  // Tablet
+  @media (max-width: $bp-tablet) {
+
+  }
+
+  // Mobile
+  @media (max-width: $bp-mobile) {
+
+  }
+}
