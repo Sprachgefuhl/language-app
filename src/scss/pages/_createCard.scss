@@ -1,5 +1,8 @@
+@use "../components/mixins";
+@use "../reset";
+
 .create-card {
-  @include centered-card;
+  @include mixins.centered-card;
 
   .main {
     align-items: center;
@@ -24,17 +27,24 @@
   .dropdown {
     padding: 5px 10px;
     font-size: 16px;
-    color: $text-primary;
+    color: reset.$text-primary;
     background: transparent;
-    border: 1px solid $colour-border;
+    border: 1px solid reset.$colour-border;
     border-radius: 8px;
+    text-align: left;
+  }
+
+  #language {
+    margin-right: auto;
+    margin-left: 8px;
   }
 
   .find-audio {
     display: flex;
     align-items: center;
-    color: $orange;
-    border-bottom: 1px solid $orange;
+    color: reset.$orange;
+    border-bottom: 1px solid reset.$orange;
+    cursor: pointer;
     transition: 0.2s;
 
     &:active {

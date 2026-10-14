@@ -1,5 +1,7 @@
+@use "../components/mixins";
+
 .login {
-  @include centered-card;
+  @include mixins.centered-card;
 
   .card-content .card-item {
     justify-content: left;

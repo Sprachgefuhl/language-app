@@ -10,7 +10,7 @@ const updateProfile = async (req, res) => {
   if (!first.length || !last.length) return res.status(400).json({ msg: 'Missing required fields' });
 
   // validate password
-  if (password && password !== repeat || repeat && repeat !== password) return res.status(401).json({ msg: 'Password does not match' });
+  if (password !== repeat) return res.status(401).json({ msg: 'Password does not match' });
   if (password) password = await bcrypt.hash(password, 12);
   else password = user.password;
 

@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middleware/auth');
 const { denyUserAccess } = require('../middleware/roles');
-const { getUserByID, getAllUsers, createUser } = require('../controllers/user');
+const { getAllUsers, createUser } = require('../controllers/user');
 
 router.get('/', authenticateToken, denyUserAccess, async (req, res) => {
-  res.render('users/index', { currentUser: await getUserByID(req.currentUserId), users: await getAllUsers() });
+  res.render('users/index', { currentUser: req.user, users: await getAllUsers() });
 });
 
-router.get('/create', authenticateToken, denyUserAccess, async (req, res) => {
-  res.render('users/create', { currentUser: await getUserByID(req.currentUserId) });
+router.get('/create', authenticateToken, denyUserAccess, (req, res) => {
+  res.render('users/create', { currentUser: req.user });
 });
 
 router.post('/create', createUser);

@@ -1,7 +1,9 @@
+@use "../components/mixins";
+
 .users {
-  @include centered-card;
+  @include mixins.centered-card;
 }
 
 .create-user {
-  @include centered-card;
+  @include mixins.centered-card;
 }

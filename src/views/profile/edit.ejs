@@ -45,7 +45,7 @@
     document.getElementById('edit-profile-btn').addEventListener('click', async () => {
       try {
         const [first, last, password, repeat] = ['first','last','password','repeat'].map(id => document.getElementById(id).value)
-        showStatus('Updating...', 'info');
+        showStatus('Updating...', 'load');
 
         const res = await fetch('/profile/edit', {
           method: 'POST',

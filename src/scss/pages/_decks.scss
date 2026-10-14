@@ -1,23 +1,20 @@
+@use "../components/mixins";
+@use "../reset";
+
 .decks {
-  @include centered-card;
+  @include mixins.centered-card;
 
   #review-count {
-    align-items: center;
-    color: $blue
+    color: reset.$blue
   }
 
   .card-item-title {
-    color: $orange;
-    border-bottom: 1px solid $orange;
+    color: reset.$orange;
+    border-bottom: 1px solid reset.$orange;
 
     &:active {
       transform: scale(0.90);
     }
-  }
-
-  .card-item-right {
-    display: flex;
-    gap: 15px;
   }
 
   .open-overlay {
@@ -26,11 +23,11 @@
     align-items: center;
     margin: 20px 30px;
     padding: 8px 16px;
-    color: $text-primary;
-    font-size: 20px;
+    color: reset.$text-primary;
+    font-size: 16px;
     cursor: pointer;
     &:hover {
-      color: $text-muted;
+      color: reset.$text-muted;
     }
 
     i {
@@ -39,12 +36,8 @@
   }
 }
 
-.create {
-  @include centered-card;
-}
-
 .review {
-  @include centered-card;
+  @include mixins.centered-card;
   
   .flashcard {
     flex: 1;
@@ -62,16 +55,16 @@
       gap: 16px;
 
       &-header {
-        font-size: 14px;
-        font-weight: $font-bold;
+        font-size: 12px;
+        font-weight: reset.$font-bold;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         opacity: 0.6;
       }
 
       &-body {
-        font-size: 24px;
-        font-weight: $font-medium;
+        font-size: 20px;
+        font-weight: reset.$font-medium;
       }
     }
 
@@ -81,8 +74,7 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
-      border-top: 2px solid $colour-border;
-      font-size: 30px;
+      border-top: 2px solid reset.$colour-border;
 
       .answer {
         width: 25%;
@@ -98,68 +90,36 @@
       }
 
       .success {
-        background: $green;
+        background: reset.$green;
       }
 
       .fail {
-        background: $red;
+        background: reset.$red;
       }
     }
   }
 }
 
+.create {
+  @include mixins.centered-card;
+}
+
 .show {
-  @include centered-card;
+  @include mixins.centered-card;
 
   #card-count {
     padding-right: 12px;
-    color: $blue;
+    color: reset.$blue;
   }
 
   .delete-card {
     padding-left: 6px;
     i:hover {
-      color: $red;
+      color: reset.$red;
     }
   }
 }
 
 .edit {
-  @include centered-card;
-}
-
-// Mobile
-@media (max-width: $bp-mobile) {
-  .decks, .review, .show {
-    .card-header .card-header-right-icon {
-      font-size: 16px;
-    }
-  }
-
-  .decks {
-    .card-item-right {
-      align-items: center;
-      #review-count {
-        font-size: 16px;
-      }
-    }
-  }
-  
-  .review {
-    .flashcard {
-      &-top {
-        &-header {
-          font-size: 12px;
-        }
-
-        &-body {
-          font-size: 20px; 
-        }
-      }
-
-      &-bottom {
-        // font-size: 20px;
-      }
-    }
-  }
+  @include mixins.centered-card;
 }

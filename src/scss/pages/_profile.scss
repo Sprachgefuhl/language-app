@@ -1,12 +1,15 @@
+@use "../components/mixins";
+@use "../reset";
+
 .show-profile {
-  @include centered-card;
+  @include mixins.centered-card;
 
   #logout {
     display: flex;
     justify-content: center;
     margin-top: auto;
     margin-bottom: 18px;
-    color: $red;
+    color: reset.$red;
     font-size: 18px;
     cursor: pointer;
 
@@ -17,11 +20,11 @@
 }
 
 .edit-profile {
-  @include centered-card;
+  @include mixins.centered-card;
 }
 
 .edit-lang {
-  @include centered-card;
+  @include mixins.centered-card;
 
   #select-lang {
     padding: 30px 30px;
@@ -37,7 +40,7 @@
 }
 
 // Tablet
-@media (max-width: $bp-tablet) {
+@media (max-width: reset.$bp-tablet) {
   .edit-lang {
     #select-lang {
       padding: 20px 12px;
@@ -51,7 +54,7 @@
 }
 
 // Mobile
-@media (max-width: $bp-mobile) {
+@media (max-width: reset.$bp-mobile) {
   .show-profile {
     #logout {
       font-size: 16px;

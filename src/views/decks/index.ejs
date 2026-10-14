@@ -42,7 +42,7 @@
         <% if (decks.length) { %>
           <div class="open-overlay">
             <i class="fa-solid fa-circle-plus"></i>
-            <p>Card</p>
+            <p>Flashcard</p>
           </div>
         <% } %>
       </div>
@@ -84,16 +84,13 @@
             </div>
 
             <div class="card-item">
-              <p class="card-item-title">Language</p>
+              <p class="card-item-title">Audio in:</p>
               <select name="language" id="language" class="dropdown">
                 <% langData.forEach(lang => { %>
                   <option value="<%= lang.code %>"><%= lang.name %></option>
                 <% }); %>
               </select>
-            </div>
 
-            <div class="card-item">
-              <p class="card-item-title">Native Audio</p>
               <div class="find-audio">
                 <i class="fa-regular fa-file-audio"></i>
                 <p>Generate</p>
@@ -109,23 +106,16 @@
 
   <script>
     const overlayEl = document.querySelector('.overlay');
-
-    document.querySelector('.open-overlay').addEventListener('click', () => {
-      overlayEl.classList.remove('hidden');
-
-      overlayEl.addEventListener('click', (e) => {
-        const cardEl = document.getElementById('flashcard-overlay');
-        if (!cardEl.contains(e.target)) overlayEl.classList.add('hidden');
-      });
-    });
-
-    document.getElementById('create-card-btn').addEventListener('click', async () => {
+    const audioCon = document.querySelector('.find-audio');
+    let audioPlaying = false;
+    
+    async function createCard() {
       try {
         const frontEl = document.getElementById('front');
         const backEl = document.getElementById('back');
         const deckId = document.getElementById('deck').value;
 
-        showStatus('Creating...', 'info');
+        showStatus('Creating...', 'load');
         const res = await fetch(`/decks/${deckId}/create-card`, {
           method: 'POST',
           headers: {
@@ -146,14 +136,14 @@
         console.error(err);
         alert('Something went wrong. Please try again.');
       }
-    });
-  
-    document.querySelector('.find-audio').addEventListener('click', async () => {
+    }
+
+    async function handleAudioFetch() {
       try {
         const frontEl = document.getElementById('front');
         const langCode = document.getElementById('language').value;
 
-        showStatus('Finding audio...', 'info');
+        showStatus('Finding audio...', 'load');
         const res = await fetch('decks/card/native-audio', {
           method: 'POST',
           headers: {
@@ -170,16 +160,42 @@
         if (result.msg === 'Audio found') {
           showStatus(result.msg, 'success');
           const audio = new Audio(result.audio);
-          document.getElementById('play').style.display = 'block';
-          document.getElementById('play').addEventListener('click', () => {
-            audio.play();
-          });
+          handleAudioPlay(audio);
         } else showStatus(result.msg, 'error');
       } catch (err) {
         console.error(err);
         alert('Something went wrong. Please try again.');
       }
-    })
+    }
+
+    function handleAudioPlay(audio) {
+      audioCon.removeEventListener('click', handleAudioFetch);
+
+      audioCon.style.border = 'none';
+      audioCon.style.color = '#10B981';
+      audioCon.children[0].classList = 'fa-solid fa-play';
+      audioCon.children[1].textContent = 'Play';
+
+      audioCon.addEventListener('click', () => {
+        if (audioPlaying) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+
+        audio.play();
+        audioPlaying = true;
+      });
+    }
+
+    audioCon.addEventListener('click', handleAudioFetch);
+    document.getElementById('create-card-btn').addEventListener('click', createCard);
+    document.querySelector('.open-overlay').addEventListener('click', () => {
+      overlayEl.classList.remove('hidden');
+      overlayEl.addEventListener('click', (e) => {
+        const cardEl = document.getElementById('flashcard-overlay');
+        if (!cardEl.contains(e.target)) overlayEl.classList.add('hidden');
+      });
+    });
   </script>
 </body>
 </html>

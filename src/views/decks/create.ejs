@@ -29,7 +29,7 @@
     document.getElementById('create-deck-btn').addEventListener('click', async () => {
       try {
         const deckName = document.getElementById('name').value.trim();
-        showStatus('Creating...', 'info');
+        showStatus('Creating...', 'load');
 
         const res = await fetch('/decks/create', {
           method: 'POST',

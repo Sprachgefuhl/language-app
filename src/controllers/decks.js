@@ -42,10 +42,10 @@ const getUserDecks = async (userId) => {
   return data;
 }
 
-const countDueCardsPerDeck = async (decks) => {
+const countDueCardsPerDeck = (decks) => {
   let dueCardsPerDecks = [];
   for (const deck of decks) {
-    const cardsDue = await getDueCards(deck.cards);
+    const cardsDue = getDueCards(deck.cards);
     dueCardsPerDecks.push({
       deckId: deck.id,
       totalCardsDue: cardsDue.length
@@ -85,8 +85,7 @@ const createCard = async (req, res) => {
 }
 
 const deleteCard = async (req, res) => {
-  const cardId = req.params.cardId;
-  console.log(cardId)
+  // const cardId = req.params.cardId;
   // const user = await getUserByID(req.currentUserId);
   // const deckId = parseInt(req.params.id);
   // const deck = await getDeck(deckId);
@@ -111,29 +110,26 @@ const deleteCard = async (req, res) => {
   // res.status(200).json({ msg: 'created' });
 }
 
-const getDueCards = async (cards) => {
+const getDueCards = (cards) => {
   if (!cards.length) return [];
   const now = Date.now();
   const due = cards.filter(card => card.due <= now);
   return due;
 }
 
-const updateCard = async (deck, newCard) => {
-  const updatedCards = deck.cards.map(card => {
-    if (card.id === newCard.id) {
-      return newCard;
-    }
+const updateCard = async (deckId, updatedCard) => {
+  const deck = await getDeck(deckId);
+  if (!deck) throw new Error('Deck not found');
 
-    return card;
-  });
+  const cards = deck.cards.map(c => c.id === updatedCard.id ? updatedCard : c);
 
   const { error } = await supabase
     .from('decks')
-    .update({ cards: updatedCards })
-    .eq('id', deck.id)
+    .update({ cards })
+    .eq('id', deckId);
 
-  if (error) throw new Error(error.message);
-}
+  if (error) throw error;
+};
 
 const handleCardEdit = async (req, res) => {
   const { front, back } = req.body;
@@ -183,7 +179,9 @@ const getNativeAudio = async (req, res) => {
   const langCode = req.body.langCode;
   if (!front.length) return res.status(400).json({ msg: `'Front' field empty` });
 
-  const url = `https://apifree.forvo.com/action/word-pronunciations/format/json/word/${front}/language/${langCode}/order/rate-desc/key/${process.env.FORVO_KEY}/`;
+  let url = `https://apifree.forvo.com/action/word-pronunciations/format/json/word/${front}/language/${langCode}/order/rate-desc/key/${process.env.FORVO_KEY}/`;
+  if (langCode == 'pt') url += 'country/BRA';
+  console.log(url);
   const result = await fetch(url);
   const data = await result.json();
   if (!data.items.length) return res.status(404).json({ msg: 'No audio found' });

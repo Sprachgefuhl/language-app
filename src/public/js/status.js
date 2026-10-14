@@ -1,5 +1,4 @@
 function showStatus(msg, type) {
-  // Remove any existing status message
   const existing = document.querySelector('.status-con');
   if (existing) existing.remove();
 
@@ -11,8 +10,9 @@ function showStatus(msg, type) {
 
   const colours = {
     info:    { colour: '#60A5FA', icon: 'info' },
+    load:    { colour: '#60A5FA', icon: 'info' },
     success: { colour: '#10B981', icon: 'check' },
-    error:   { colour: '#F87171', icon: 'exclamation' }
+    error:   { colour: '#F87171', icon: 'exclamation' },
   };
 
   const style = colours[type];
@@ -23,9 +23,10 @@ function showStatus(msg, type) {
   con.appendChild(content);
   document.body.appendChild(con);
 
-  // Auto-hide after 3 seconds
-  setTimeout(() => {
-    con.style.opacity = '0';
-    setTimeout(() => con.remove(), 300); // wait for fade-out
-  }, 2000);
+  if (type !== 'load') {
+    setTimeout(() => {
+      con.style.opacity = '0';
+      setTimeout(() => con.remove(), 300); // wait for fade-out
+    }, 3000);
+  }
 }

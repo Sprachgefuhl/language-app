@@ -125,11 +125,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .login .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .login .card-header-title {
   padding-left: 10px;
@@ -140,6 +140,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -149,7 +150,6 @@ select {
 }
 .login .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .login .card-content {
   padding: 0 14px;
@@ -221,11 +221,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .decks .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .decks .card-header-title {
   padding-left: 10px;
@@ -236,6 +236,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -245,7 +246,6 @@ select {
 }
 .decks .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .decks .card-content {
   padding: 0 14px;
@@ -280,7 +280,6 @@ select {
   font-size: 16px;
 }
 .decks #review-count {
-  align-items: center;
   color: #60A5FA;
 }
 .decks .card-item-title {
@@ -290,10 +289,6 @@ select {
 .decks .card-item-title:active {
   transform: scale(0.9);
 }
-.decks .card-item-right {
-  display: flex;
-  gap: 15px;
-}
 .decks .open-overlay {
   display: flex;
   justify-content: center;
@@ -301,7 +296,7 @@ select {
   margin: 20px 30px;
   padding: 8px 16px;
   color: #F4F5FA;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
 }
 .decks .open-overlay:hover {
@@ -311,94 +306,6 @@ select {
   padding-right: 8px;
 }
 
-.create .main {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 30px 15px;
-  min-height: 80dvh;
-}
-.create .card {
-  margin: 0 12px;
-  width: 100%;
-  max-height: 375px;
-  min-height: 325px;
-  max-height: 425px;
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  background-color: #18191C;
-  border: 1px solid #222422;
-  border-radius: 15px;
-  color: #F4F5FA;
-  box-shadow: 10px 20px 20px hsla(0, 0%, 0%, 0.2);
-}
-.create .card a {
-  color: #F4F5FA;
-  text-decoration: none;
-}
-.create .card-header {
-  display: flex;
-  align-items: center;
-  padding: 10px 14px;
-  border-bottom: 1px solid #222422;
-}
-.create .card-header i {
-  color: #F4F5FA;
-  font-size: 20px;
-}
-.create .card-header-title {
-  padding-left: 10px;
-  font-size: 18px;
-  font-weight: 500;
-}
-.create .card-header-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.create .card-header-right:active {
-  transform: scale(0.96);
-}
-.create .card-header-right-icon {
-  padding-right: 10px;
-  font-size: 18px;
-}
-.create .card-content {
-  padding: 0 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  flex: 1;
-  overflow-y: auto;
-}
-.create .card-content .nothing {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-.create .card-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #222422;
-}
-.create .card-item-title {
-  color: #A8ABB5;
-}
-.create .card-item input {
-  background: none;
-  border: none;
-  outline: none;
-  text-align: right;
-  color: #F4F5FA;
-  font-size: 16px;
-}
 .review .main {
   display: flex;
   justify-content: center;
@@ -429,11 +336,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .review .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .review .card-header-title {
   padding-left: 10px;
@@ -444,6 +351,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -453,7 +361,6 @@ select {
 }
 .review .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .review .card-content {
   padding: 0 14px;
@@ -503,14 +410,14 @@ select {
   gap: 16px;
 }
 .review .flashcard-top-header {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.6;
 }
 .review .flashcard-top-body {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
 }
 .review .flashcard-bottom {
@@ -520,7 +427,6 @@ select {
   align-items: center;
   justify-content: space-evenly;
   border-top: 2px solid #222422;
-  font-size: 30px;
 }
 .review .flashcard-bottom .answer {
   width: 25%;
@@ -540,6 +446,94 @@ select {
   background: #F87171;
 }
 
+.create .main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 15px;
+  min-height: 80dvh;
+}
+.create .card {
+  margin: 0 12px;
+  width: 100%;
+  max-height: 375px;
+  min-height: 325px;
+  max-height: 425px;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  background-color: #18191C;
+  border: 1px solid #222422;
+  border-radius: 15px;
+  color: #F4F5FA;
+  box-shadow: 10px 20px 20px hsla(0, 0%, 0%, 0.2);
+}
+.create .card a {
+  color: #F4F5FA;
+  text-decoration: none;
+}
+.create .card-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 16px;
+  border-bottom: 1px solid #222422;
+}
+.create .card-header i {
+  color: #F4F5FA;
+}
+.create .card-header-title {
+  padding-left: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.create .card-header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.create .card-header-right:active {
+  transform: scale(0.96);
+}
+.create .card-header-right-icon {
+  padding-right: 10px;
+}
+.create .card-content {
+  padding: 0 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  overflow-y: auto;
+}
+.create .card-content .nothing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.create .card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #222422;
+}
+.create .card-item-title {
+  color: #A8ABB5;
+}
+.create .card-item input {
+  background: none;
+  border: none;
+  outline: none;
+  text-align: right;
+  color: #F4F5FA;
+  font-size: 16px;
+}
 .show .main {
   display: flex;
   justify-content: center;
@@ -570,11 +564,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .show .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .show .card-header-title {
   padding-left: 10px;
@@ -585,6 +579,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -594,7 +589,6 @@ select {
 }
 .show .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .show .card-content {
   padding: 0 14px;
@@ -669,11 +663,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .edit .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .edit .card-header-title {
   padding-left: 10px;
@@ -684,6 +678,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -693,7 +688,6 @@ select {
 }
 .edit .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .edit .card-content {
   padding: 0 14px;
@@ -727,23 +721,6 @@ select {
   color: #F4F5FA;
   font-size: 16px;
 }
-@media (max-width: 600px) {
-  .decks .card-header .card-header-right-icon, .review .card-header .card-header-right-icon, .show .card-header .card-header-right-icon {
-    font-size: 16px;
-  }
-  .decks .card-item-right {
-    align-items: center;
-  }
-  .decks .card-item-right #review-count {
-    font-size: 16px;
-  }
-  .review .flashcard-top-header {
-    font-size: 12px;
-  }
-  .review .flashcard-top-body {
-    font-size: 20px;
-  }
-}
 .create-card .main {
   display: flex;
   justify-content: center;
@@ -774,11 +751,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .create-card .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .create-card .card-header-title {
   padding-left: 10px;
@@ -789,6 +766,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -798,7 +776,6 @@ select {
 }
 .create-card .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .create-card .card-content {
   padding: 0 14px;
@@ -856,12 +833,18 @@ select {
   background: transparent;
   border: 1px solid #222422;
   border-radius: 8px;
+  text-align: left;
+}
+.create-card #language {
+  margin-right: auto;
+  margin-left: 8px;
 }
 .create-card .find-audio {
   display: flex;
   align-items: center;
   color: #FB923C;
   border-bottom: 1px solid #FB923C;
+  cursor: pointer;
   transition: 0.2s;
 }
 .create-card .find-audio:active {
@@ -901,11 +884,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .show-profile .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .show-profile .card-header-title {
   padding-left: 10px;
@@ -916,6 +899,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -925,7 +909,6 @@ select {
 }
 .show-profile .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .show-profile .card-content {
   padding: 0 14px;
@@ -1002,11 +985,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .edit-profile .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .edit-profile .card-header-title {
   padding-left: 10px;
@@ -1017,6 +1000,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -1026,7 +1010,6 @@ select {
 }
 .edit-profile .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .edit-profile .card-content {
   padding: 0 14px;
@@ -1090,11 +1073,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .edit-lang .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .edit-lang .card-header-title {
   padding-left: 10px;
@@ -1105,6 +1088,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -1114,7 +1098,6 @@ select {
 }
 .edit-lang .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .edit-lang .card-content {
   padding: 0 14px;
@@ -1209,11 +1192,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .users .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .users .card-header-title {
   padding-left: 10px;
@@ -1224,6 +1207,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -1233,7 +1217,6 @@ select {
 }
 .users .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .users .card-content {
   padding: 0 14px;
@@ -1297,11 +1280,11 @@ select {
   display: flex;
   align-items: center;
   padding: 10px 14px;
+  font-size: 16px;
   border-bottom: 1px solid #222422;
 }
 .create-user .card-header i {
   color: #F4F5FA;
-  font-size: 20px;
 }
 .create-user .card-header-title {
   padding-left: 10px;
@@ -1312,6 +1295,7 @@ select {
   margin-left: auto;
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s;
@@ -1321,7 +1305,6 @@ select {
 }
 .create-user .card-header-right-icon {
   padding-right: 10px;
-  font-size: 18px;
 }
 .create-user .card-content {
   padding: 0 14px;

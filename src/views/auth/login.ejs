@@ -34,7 +34,7 @@
       const [email, password] = ['email', 'password'].map(id => document.getElementById(id).value)
 
       try {
-        showStatus('Connecting...', 'info');
+        showStatus('Logging in...', 'load');
 
         const res = await fetch('/login/auth', {
           method: 'POST',

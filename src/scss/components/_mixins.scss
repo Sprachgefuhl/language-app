@@ -1,3 +1,5 @@
+@use "../reset";
+
 @mixin centered-card {
   .main {
     display: flex;
@@ -16,14 +18,14 @@
     display: flex;
     flex-direction: column;
     font-size: 16px;
-    background-color: $bg-secondary;
-    border: 1px solid $colour-border;
+    background-color: reset.$bg-secondary;
+    border: 1px solid reset.$colour-border;
     border-radius: 15px;
-    color: $text-primary;
+    color: reset.$text-primary;
     box-shadow: 10px 20px 20px hsl(0deg 0% 0% / 0.2);
 
     a {
-      color: $text-primary;
+      color: reset.$text-primary;
       text-decoration: none;
     }
 
@@ -31,23 +33,24 @@
       display: flex;
       align-items: center;
       padding: 10px 14px;
-      border-bottom: 1px solid $colour-border;
+      font-size: 16px;
+      border-bottom: 1px solid reset.$colour-border;
 
       i {
-        color: $text-primary;
-        font-size: 20px;
+        color: reset.$text-primary;
       }
 
       &-title {
         padding-left: 10px;
         font-size: 18px;
-        font-weight: $font-medium;
+        font-weight: reset.$font-medium;
       }
 
       &-right {
         margin-left: auto;
         display: flex;
         align-items: center;
+        font-size: 16px;
         border-radius: 5px;
         cursor: pointer;
         transition: 0.2s;
@@ -58,7 +61,6 @@
 
         &-icon {
           padding-right: 10px;
-          font-size: 18px;
         }
       }
     }
@@ -84,10 +86,10 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px 0;
-      border-bottom: 1px solid $colour-border;
+      border-bottom: 1px solid reset.$colour-border;
 
       &-title {
-        color: $text-muted;
+        color: reset.$text-muted;
       }
 
       input {
@@ -95,15 +97,15 @@
         border: none;
         outline: none;
         text-align: right;
-        color: $text-primary;
+        color: reset.$text-primary;
         font-size: 16px;
       }
     }
   }
 
   // Tablet
-  @media (max-width: $bp-tablet) {}
+  @media (max-width: reset.$bp-tablet) {}
 
   // Mobile
-  @media (max-width: $bp-mobile) {}
+  @media (max-width: reset.$bp-mobile) {}
 }

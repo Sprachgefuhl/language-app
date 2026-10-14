@@ -39,7 +39,7 @@
     document.getElementById('create-user-btn').addEventListener('click', async () => {
       try {
         const [first, last, email] = ['first', 'last', 'email'].map(id => document.getElementById(id).value);
-        showStatus('Creating...', 'info');
+        showStatus('Creating...', 'load');
 
         const res = await fetch('/admin/users/create', {
           method: 'POST',
