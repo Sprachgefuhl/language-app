@@ -178,4 +178,18 @@ const getRandomCard = (cards) => {
   return cards[Math.floor(Math.random() * cards.length)];
 }
 
-module.exports = { createDeck, getDeck, getUserDecks, countDueCardsPerDeck, createCard, deleteCard, getDueCards, handleCardEdit, handleCardReview, getRandomCard }
+const getNativeAudio = async (req, res) => {
+  const front = req.body.front;
+  const langCode = req.body.langCode;
+  if (!front.length) return res.status(400).json({ msg: `'Front' field empty` });
+
+  const url = `https://apifree.forvo.com/action/word-pronunciations/format/json/word/${front}/language/${langCode}/order/rate-desc/key/${process.env.FORVO_KEY}/`;
+  const result = await fetch(url);
+  const data = await result.json();
+  if (!data.items.length) return res.status(404).json({ msg: 'No audio found' });
+
+  const audio = data.items[0].pathmp3;
+  res.status(200).json({ msg: 'Audio found', audio: audio });
+}
+
+module.exports = { createDeck, getDeck, getUserDecks, countDueCardsPerDeck, createCard, deleteCard, getDueCards, handleCardEdit, handleCardReview, getRandomCard, getNativeAudio }

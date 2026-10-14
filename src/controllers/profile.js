@@ -5,7 +5,6 @@ const { getUserByID } = require('./user');
 const updateProfile = async (req, res) => {
   let { first, last, password, repeat } = req.body;
   const user = await getUserByID(req.currentUserId);
-  const language = user.current_language;
 
   // validate name not empty
   if (!first.length || !last.length) return res.status(400).json({ msg: 'Missing required fields' });
@@ -20,7 +19,6 @@ const updateProfile = async (req, res) => {
     .update({
       first: first,
       last: last,
-      current_language: language,
       password: password
     })
     .eq('id', user.id)
@@ -28,26 +26,7 @@ const updateProfile = async (req, res) => {
 
   if (error) throw new Error(error.message);
   console.log(`👤 ${user.first} ${user.last}'s profile has been updated`);
-
-  // res.redirect('/profile/show');
-  res.status(200).json({ msg: 'Successfully updated' });
+  res.status(200).json({ msg: 'Profile updated' });
 }
 
-const updateLanguage = async (req, res) => {
-  const language = req.body.language
-  const user = await getUserByID(req.currentUserId);
-  
-  const { data, error } = await supabase
-    .from('users')
-    .update({
-      current_language: language
-    })
-    .eq('id', user.id)
-    .select()
-
-  if (error) throw new Error(error.message);
-  console.log(`👤 ${user.first} ${user.last} has updated language to ${language}`);
-  res.status(200).json({ msg: 'Successfully updated language' });
-}
-
-module.exports = { updateProfile, updateLanguage }
+module.exports = { updateProfile }

@@ -5,14 +5,14 @@
     <div class="main">
       <div class="card">
         <div class="card-header">
-          <i class="fa-solid fa-book card-header-icon"></i>
-          <h1 class="card-header-title"><%= deck.name %></h1>
+          <i class="fa-solid fa-bolt"></i>
+          <h1 class="card-header-title"><%= deck.name %> review</h1>
+          <!-- <p id="review-count"><%= totalDue %></p> -->
 
           <div class="card-header-right">
             <a href="/decks">
               <i class="fa-solid fa-arrow-left card-header-right-icon"></i>
             </a>
-            <p id="review-count"><%= totalDue %></p>
           </div>
         </div>
 
@@ -87,7 +87,7 @@
       }
     }
 
-    answerBtns.forEach(btn => btn.addEventListener('click', (e) => handleAnswer(e)));
+    // answerBtns.forEach(btn => btn.addEventListener('click', (e) => handleAnswer(e)));
   </script>
 </body>
 </html>

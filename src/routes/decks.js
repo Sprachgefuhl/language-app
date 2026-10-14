@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middleware/auth');
 const { getUserByID } = require('../controllers/user');
-const { createDeck, getUserDecks, getDeck, countDueCardsPerDeck, getDueCards, handleCardReview, getRandomCard, createCard, handleCardEdit } = require('../controllers/decks');
+const { createDeck, getUserDecks, getDeck, countDueCardsPerDeck, getDueCards, handleCardReview, getRandomCard, createCard, handleCardEdit, getNativeAudio } = require('../controllers/decks');
+const langData = require('../utils/langData');
 
 router.get('/', authenticateToken, async (req, res) => {
   const user = await getUserByID(req.currentUserId);
   const decks = await getUserDecks(user.id);
   const dueCardsPerDeck = await countDueCardsPerDeck(decks);
   
-  res.render('decks/index', { currentUser: user, decks: decks, dueCardsPerDeck: dueCardsPerDeck });
+  res.render('decks/index', { currentUser: user, decks: decks, dueCardsPerDeck: dueCardsPerDeck, langData:langData });
 });
 
 router.get('/create', authenticateToken, async (req, res) => res.render('decks/create', { currentUser: await getUserByID(req.currentUserId) }));
@@ -44,5 +45,6 @@ router.get('/:deckId/card/edit/:cardId', authenticateToken, async (req, res) => 
 });
 
 router.post('/:deckId/card/edit/:cardId', authenticateToken, handleCardEdit);
+router.post('/card/native-audio', authenticateToken, getNativeAudio);
 
 module.exports = router;

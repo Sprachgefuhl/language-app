@@ -20,10 +20,8 @@
     "sass": "^1.102.0"
   },
   "dependencies": {
-    "@google/genai": "^2.12.0",
     "@supabase/supabase-js": "^2.110.7",
     "bcrypt": "^6.0.0",
-    "cheerio": "^1.2.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",

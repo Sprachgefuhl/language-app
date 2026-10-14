@@ -1,23 +1,5 @@
-@import '../base/variables';
-@import '../components/mixins';
-
 .create-card {
   @include centered-card;
-
-  .open-overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 30px;
-    padding: 8px 16px;
-    color: $text-primary;
-    font-size: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    &:hover {
-      color: $text-muted;
-    }
-  }
 
   .main {
     align-items: center;
@@ -39,12 +21,28 @@
     pointer-events: none;
   }
 
-  #deck {
+  .dropdown {
     padding: 5px 10px;
     font-size: 16px;
     color: $text-primary;
     background: transparent;
     border: 1px solid $colour-border;
     border-radius: 8px;
+  }
+
+  .find-audio {
+    display: flex;
+    align-items: center;
+    color: $orange;
+    border-bottom: 1px solid $orange;
+    transition: 0.2s;
+
+    &:active {
+      transform: scale(0.90);
+    }
+
+    i {
+      padding-right: 8px;
+    }
   }
 }

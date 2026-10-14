@@ -36,9 +36,7 @@ const createUser = async (req, res) => {
   const { first, last, email } = req.body;
   const user = await getUserByEmail(email.trim().toLowerCase());
 
-  // empty fields
   if (!first.length || !last.length || !email.length) return res.status(400).json({ msg: 'Missing required fields' });
-
   if (user) return res.status(400).json({ msg: 'Email already exists' });
 
   const { data, error } = await supabase
@@ -46,7 +44,6 @@ const createUser = async (req, res) => {
     .insert([{
       first: first,
       last: last,
-      current_language: '',
       role: 'user',
       email: email.trim().toLowerCase(),
       password: await bcrypt.hash(process.env.USER_PASS, 12)
@@ -56,7 +53,7 @@ const createUser = async (req, res) => {
 
   if (error) throw new Error(error.message);
   console.log(`👤 New user: ${data.first} ${data.last}`);
-  return res.status(200).json({ msg: 'Successfully created user' });
+  return res.status(200).json({ msg: 'User created' });
 }
 
 const deleteUser = async () => {

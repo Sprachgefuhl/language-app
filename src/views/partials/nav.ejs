@@ -1,30 +1,18 @@
 <div class="nav">
-  <a href="/profile/edit/language">
-    <div class="nav-el">
-      <% if (!currentUser.current_language) { %>
-        <i id="unselected-lang-icon" class="fa-solid fa-earth-europe"></i>
-      <% } else { %>
-        <img src="/images/<%= currentUser.current_language %>.png" width="45">
-      <% } %>
+  <a href="/home">
+    <div class="nav-title">
+      <p>Flashcard App</p>
     </div>
   </a>
 
-  <div class="nav-center">
-
-    <a href="/text">
-      <div class="nav-el">
-        <i class="fa-solid fa-book-open"></i>
-        <p>Text</p>
-      </div>
-    </a>
-
+  <div class="nav-links">
     <a href="/decks">
       <div class="nav-el">
-        <i class="fa-solid fa-bolt"></i>
+        <i class="fa-regular fa-folder-open"></i>
         <p>Decks</p>
       </div>
     </a>
-
+  
     <% if (currentUser.role==='admin' ) { %>
       <a href="/admin/users">
         <div class="nav-el">
@@ -33,7 +21,7 @@
         </div>
       </a>
     <% } %>
-
+  
     <a href="/profile/show">
       <div class="nav-el">
         <i class="fa-regular fa-circle-user"></i>
@@ -42,20 +30,5 @@
         </p>
       </div>
     </a>
-
-  </div>
-
-  <div class="nav-el" id="logout-btn">
-    <i class="fa-solid fa-right-from-bracket"></i>
-    <p>Logout</p>
   </div>
 </div>
-
-<script>
-  const logoutEl = document.getElementById('logout-btn');
-
-  logoutEl.addEventListener('click', () => {
-    fetch('/logout?_method=DELETE', { method: 'post' })
-      .then(res => window.location = res.url);
-  });
-</script>

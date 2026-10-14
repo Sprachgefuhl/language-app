@@ -31,17 +31,21 @@
             <p><%= currentUser.role %></p>
           </div>
 
-          <div class="card-item">
-            <p class="card-item-title">Language</p>
-            <% if (currentUser.current_language) { %>
-              <img src="/images/<%= currentUser.current_language %>.png" width="25">
-              <p><%= currentUser.current_language %></p>
-            <% } %>
+          <div id="logout">
+            <p>Logout</p>
           </div>
         </div>
-
       </div>
     </div>
   </div>
+
+  <script>
+    const logoutEl = document.getElementById('logout');
+
+    logoutEl.addEventListener('click', () => {
+      fetch('/logout?_method=DELETE', { method: 'post' })
+        .then(res => window.location = res.url);
+    });
+</script>
 </body>
 </html>

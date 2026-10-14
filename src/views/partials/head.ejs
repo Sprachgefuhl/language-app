@@ -4,8 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111210">
   <script src="https://kit.fontawesome.com/49042efa96.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/style.css">
   <script src="/js/status.js"></script>
-  <title>Document</title>
+  <title>Flashcard App</title>
+
+  <script>
+    // --- 1. PREVENT PINCH ZOOM ---
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchmove', function (e) {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+
+    // --- 2. PREVENT DOUBLE-TAP ZOOM ---
+    let lastTouchEnd = 0;
+
+    document.addEventListener('touchend', function (e) {
+      const now = (new Date()).getTime();
+      
+      // If the delay between taps is less than 300ms, block the interaction
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      
+      lastTouchEnd = now;
+    }, { passive: false });
+  </script>
 </head>

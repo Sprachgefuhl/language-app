@@ -1,12 +1,18 @@
-@import '../base/variables';
-@import '../components/mixins';
-
 .show-profile {
   @include centered-card;
 
-  img {
-    margin-left: auto;
-    margin-right: 10px;
+  #logout {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: 18px;
+    color: $red;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(0.90);
+    }
   }
 }
 
@@ -46,6 +52,11 @@
 
 // Mobile
 @media (max-width: $bp-mobile) {
+  .show-profile {
+    #logout {
+      font-size: 16px;
+    }
+  }
   .edit-lang {
     #select-lang {
       gap: 14px;
