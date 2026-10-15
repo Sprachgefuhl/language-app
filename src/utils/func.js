@@ -16,7 +16,7 @@ const standardizeDate = (date) => {
   return `${year}/${month}/${day}`;
 }
 
-function timeoutPromise(promise, ms) {
+const timeoutPromise = (promise, ms) => {
   let timeoutId;
   const timeout = new Promise((_, reject) => {
     timeoutId = setTimeout(() => reject(new Error('Timeout')), ms);
@@ -27,4 +27,12 @@ function timeoutPromise(promise, ms) {
   });
 }
 
-module.exports = { hash, generateToken, standardizeDate, timeoutPromise };
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+module.exports = { hash, generateToken, standardizeDate, timeoutPromise, shuffleArray };

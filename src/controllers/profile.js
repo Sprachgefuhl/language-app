@@ -4,7 +4,7 @@ const { getUserByID } = require('./user');
 
 const updateProfile = async (req, res) => {
   let { first, last, password, repeat } = req.body;
-  const user = await getUserByID(req.currentUserId);
+  const user = await getUserByID(req.user.id);
 
   // validate name not empty
   if (!first.length || !last.length) return res.status(400).json({ msg: 'Missing required fields' });

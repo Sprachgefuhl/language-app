@@ -1,5 +1,9 @@
 const langData = [
   {
+    name: 'Russian',
+    code: 'ru',
+  },
+  {
     name: 'Spanish',
     code: 'es',
   },
@@ -10,10 +14,6 @@ const langData = [
   {
     name: 'German',
     code: 'de',
-  },
-  {
-    name: 'Russian',
-    code: 'ru',
   },
 ];
 

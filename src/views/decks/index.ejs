@@ -92,8 +92,8 @@
               </select>
 
               <div class="find-audio">
-                <i class="fa-regular fa-file-audio"></i>
-                <p>Generate</p>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>Find</p>
               </div>
             </div>
 
@@ -107,14 +107,15 @@
   <script>
     const overlayEl = document.querySelector('.overlay');
     const audioCon = document.querySelector('.find-audio');
-    let audioPlaying = false;
     
     async function createCard() {
       try {
         const frontEl = document.getElementById('front');
         const backEl = document.getElementById('back');
         const deckId = document.getElementById('deck').value;
-
+        const audio = localStorage.getItem('audio');
+        localStorage.removeItem('audio'); // reset the variable each time
+        
         showStatus('Creating...', 'load');
         const res = await fetch(`/decks/${deckId}/create-card`, {
           method: 'POST',
@@ -123,7 +124,8 @@
           },
           body: JSON.stringify({
             front: frontEl.value.trim(),
-            back: backEl.value.trim()
+            back: backEl.value.trim(),
+            audio: audio,
           })
         });
 
@@ -140,7 +142,7 @@
 
     async function handleAudioFetch() {
       try {
-        const frontEl = document.getElementById('front');
+        const backEl = document.getElementById('back');
         const langCode = document.getElementById('language').value;
 
         showStatus('Finding audio...', 'load');
@@ -150,7 +152,7 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            front: frontEl.value.trim().toLowerCase(),
+            back: backEl.value.trim().toLowerCase(),
             langCode: langCode,
           })
         });
@@ -159,6 +161,7 @@
 
         if (result.msg === 'Audio found') {
           showStatus(result.msg, 'success');
+          localStorage.setItem('audio', result.audio);
           const audio = new Audio(result.audio);
           handleAudioPlay(audio);
         } else showStatus(result.msg, 'error');
@@ -177,13 +180,9 @@
       audioCon.children[1].textContent = 'Play';
 
       audioCon.addEventListener('click', () => {
-        if (audioPlaying) {
-          audio.pause();
-          audio.currentTime = 0;
-        }
-
+        audio.pause();
+        audio.currentTime = 0;
         audio.play();
-        audioPlaying = true;
       });
     }
 

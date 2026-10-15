@@ -8,7 +8,7 @@ const createDeck = async (req, res) => {
     .from('decks')
     .insert({
       name: name,
-      user_id: req.currentUserId,
+      user_id: req.user.id,
     })
     .select()
 

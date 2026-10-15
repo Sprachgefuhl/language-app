@@ -45,6 +45,7 @@ const createUser = async (req, res) => {
       first: first,
       last: last,
       role: 'user',
+      config: {},
       email: email.trim().toLowerCase(),
       password: await bcrypt.hash(process.env.USER_PASS, 12)
     }])

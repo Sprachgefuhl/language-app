@@ -146,7 +146,7 @@ select {
   transition: 0.2s;
 }
 .login .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .login .card-header-right-icon {
   padding-right: 10px;
@@ -242,7 +242,7 @@ select {
   transition: 0.2s;
 }
 .decks .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .decks .card-header-right-icon {
   padding-right: 10px;
@@ -357,7 +357,7 @@ select {
   transition: 0.2s;
 }
 .review .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .review .card-header-right-icon {
   padding-right: 10px;
@@ -394,6 +394,18 @@ select {
   color: #F4F5FA;
   font-size: 16px;
 }
+.review .card-header #card-state {
+  display: none;
+  margin-left: 12px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid currentColor;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
 .review .flashcard {
   flex: 1;
   display: flex;
@@ -407,6 +419,7 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 16px;
 }
 .review .flashcard-top-header {
@@ -416,9 +429,23 @@ select {
   letter-spacing: 0.05em;
   opacity: 0.6;
 }
-.review .flashcard-top-body {
+.review .flashcard-top-content {
+  display: flex;
+  align-items: center;
+}
+.review .flashcard-top-content-body {
   font-size: 20px;
   font-weight: 500;
+}
+.review .flashcard-top-content #audio-el {
+  display: none;
+  padding-left: 8px;
+  font-size: 20px;
+  color: #FB923C;
+  cursor: pointer;
+}
+.review .flashcard-top-content #audio-el:active {
+  transform: scale(0.9);
 }
 .review .flashcard-bottom {
   flex: 1;
@@ -444,6 +471,10 @@ select {
 }
 .review .flashcard-bottom .fail {
   background: #F87171;
+}
+.review .flashcard-bottom .continue {
+  display: none;
+  background: #60A5FA;
 }
 
 .create .main {
@@ -497,7 +528,7 @@ select {
   transition: 0.2s;
 }
 .create .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .create .card-header-right-icon {
   padding-right: 10px;
@@ -585,7 +616,7 @@ select {
   transition: 0.2s;
 }
 .show .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .show .card-header-right-icon {
   padding-right: 10px;
@@ -684,7 +715,7 @@ select {
   transition: 0.2s;
 }
 .edit .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .edit .card-header-right-icon {
   padding-right: 10px;
@@ -772,7 +803,7 @@ select {
   transition: 0.2s;
 }
 .create-card .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .create-card .card-header-right-icon {
   padding-right: 10px;
@@ -905,7 +936,7 @@ select {
   transition: 0.2s;
 }
 .show-profile .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .show-profile .card-header-right-icon {
   padding-right: 10px;
@@ -1006,7 +1037,7 @@ select {
   transition: 0.2s;
 }
 .edit-profile .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .edit-profile .card-header-right-icon {
   padding-right: 10px;
@@ -1094,7 +1125,7 @@ select {
   transition: 0.2s;
 }
 .edit-lang .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .edit-lang .card-header-right-icon {
   padding-right: 10px;
@@ -1213,7 +1244,7 @@ select {
   transition: 0.2s;
 }
 .users .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .users .card-header-right-icon {
   padding-right: 10px;
@@ -1301,7 +1332,7 @@ select {
   transition: 0.2s;
 }
 .create-user .card-header-right:active {
-  transform: scale(0.96);
+  transform: scale(0.9);
 }
 .create-user .card-header-right-icon {
   padding-right: 10px;

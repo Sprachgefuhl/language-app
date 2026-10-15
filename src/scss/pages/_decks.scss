@@ -38,6 +38,21 @@
 
 .review {
   @include mixins.centered-card;
+
+  .card-header {
+    #card-state {
+      display: none;
+      margin-left: 12px;
+      padding: 2px 6px;
+      font-size: 11px;
+      font-weight: reset.$font-bold;
+      border: 1px solid currentColor;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.6;
+    }
+  }
   
   .flashcard {
     flex: 1;
@@ -52,6 +67,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       gap: 16px;
 
       &-header {
@@ -62,9 +78,26 @@
         opacity: 0.6;
       }
 
-      &-body {
-        font-size: 20px;
-        font-weight: reset.$font-medium;
+      &-content {
+        display: flex;
+        align-items: center;
+
+        &-body {
+          font-size: 20px;
+          font-weight: reset.$font-medium;  
+        }
+
+        #audio-el {
+          display: none;
+          padding-left: 8px;
+          font-size: 20px;
+          color: reset.$orange;
+          cursor: pointer;
+
+          &:active {
+            transform: scale(0.90);
+          }
+        }
       }
     }
 
@@ -95,6 +128,11 @@
 
       .fail {
         background: reset.$red;
+      }
+
+      .continue {
+        display: none;
+        background: reset.$blue;
       }
     }
   }

@@ -6,13 +6,19 @@ const authenticateToken = async (req, res, next) => {
   if (!token) return res.redirect('/login');
 
   const result = verifyAccessToken(token);
-  if (!result.success) return res.redirect('/login');
+  if (!result.success) {
+    res.clearCookie('jwt');
+    return res.redirect('/login');
+  }
 
   const user = await getUserByID(result.data.id);
-  if (!user) return res.redirect('/login');
+  if (!user) {
+    res.clearCookie('jwt');
+    return res.redirect('/login');
+  }
 
   req.user = user;
-  req.currentUserId = user.id;
+  req.config = user.config;
   next();
 };
 

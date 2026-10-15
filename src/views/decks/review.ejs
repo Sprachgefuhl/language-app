@@ -6,7 +6,10 @@
       <div class="card">
         <div class="card-header">
           <i class="fa-solid fa-bolt"></i>
-          <h1 class="card-header-title"><%= deck.name %> review</h1>
+          <h1 class="card-header-title">Review</h1>
+          <div id="card-state">
+            <p></p>
+          </div>
           <!-- <p id="review-count"><%= totalDue %></p> -->
 
           <div class="card-header-right">
@@ -25,7 +28,10 @@
             <div class="flashcard" data-card="<%= JSON.stringify(card) %>">
               <div class="flashcard-top">
                 <span class="flashcard-top-header">front</span>
-                <p class="flashcard-top-body" id="front"></p>
+                <div class="flashcard-top-content">
+                  <p class="flashcard-top-content-body" id="front"></p>
+                  <i class="fa-solid fa-volume-high" id="audio-el"></i>
+                </div>
               </div>
 
               <div class="flashcard-bottom">
@@ -35,6 +41,10 @@
 
                 <div class="answer fail">
                   <i class="fa-regular fa-circle-xmark" id="fail"></i>
+                </div>
+
+                <div class="answer continue">
+                  <i class="fa-regular fa-circle-right"></i>
                 </div>
               </div>
             </div>
@@ -46,29 +56,57 @@
 
   <script>
     const flashcard = document.querySelector('.flashcard');
+    const stateEl = document.getElementById('card-state');
     const header = document.querySelector('.flashcard-top-header');
     const content = document.getElementById('front');
-    const answerBtns = document.querySelectorAll('.answer');
+    const audioEl = document.getElementById('audio-el');
+    const successBtn = document.querySelector('.success');
+    const failBtn = document.querySelector('.fail');
+    const continueBtn = document.querySelector('.continue');
     const card = JSON.parse(flashcard.dataset.card);
+    const states = {
+      new: { colour: '#60A5FA' },
+      learning: { colour: '#FB923C' },
+      mature: { colour: '#C084FC' },
+      relearning: { colour: '#F87171' }
+    };
+    let audio;
+
+    if (card.audio) {
+      audio = new Audio(card.audio);
+    }
+
+    const stateColour = states[card.state].colour;
+    stateEl.style.display = 'flex';
+    stateEl.textContent = card.state;
+    stateEl.style.color = stateColour;
     content.textContent = card.front;
 
-    async function handleAnswer(e) {
-      const result = e.target.classList[1];
+    async function handleAnswer(answer) {
+      console.log('hey');
       header.textContent = '';
       content.textContent = card.back;
-      answerBtns[1].style.display = 'none';
-      answerBtns[0].style.background = '#60A5FA';
-      let newBtn = answerBtns[0].children[0];
-      newBtn.classList = 'fa-regular fa-circle-right';
-      newBtn.id = '';
-      
-      answerBtns[0].removeEventListener('click', handleAnswer);
-      answerBtns[0].addEventListener('click', async () => fetchReview(result));
+
+      if (audio) {
+        audioEl.style.display = 'flex';
+        audio.play(); // autoplay
+
+        audioEl.addEventListener('click', () => {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.play();
+        });
+      }
+
+      failBtn.style.display = 'none';
+      successBtn.style.display = 'none';
+      continueBtn.style.display = 'block';
+      continueBtn.addEventListener('click', async () => fetchReview(answer));
     }
 
     async function fetchReview(answer) {
       const success = answer === 'success' ? true : false;
-      showStatus('Saving...', 'load');
+      showStatus('Updating...', 'load');
       
       try {
         const res = await fetch(`/decks/review/:${card.id}`, {
@@ -81,7 +119,7 @@
 
         const result = await res.json();
         if (result.msg === 'Card reviewed') {
-          showStatus('Saved', 'success');
+          showStatus('Updated', 'success');
           window.location.reload();
         }
       } catch (err) {
@@ -90,7 +128,8 @@
       }
     }
 
-    answerBtns.forEach(btn => btn.addEventListener('click', (e) => handleAnswer(e)));
+    successBtn.addEventListener('click', () => handleAnswer('success'));
+    failBtn.addEventListener('click', () => handleAnswer('fail'));
   </script>
 </body>
 </html>
