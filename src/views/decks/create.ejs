@@ -40,8 +40,8 @@
         });
 
         const result = await res.json();
-        if (result.msg === 'Successfully created deck') {
-          showStatus('Deck created', 'success');
+        if (result.msg === 'Deck created') {
+          showStatus(result.msg, 'success');
           window.location.href = '/decks';
         }
         else showStatus(result.msg, 'error');

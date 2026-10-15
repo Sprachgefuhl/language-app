@@ -22,7 +22,7 @@
               <p>No cards due for review</p>
             </div>
           <% } else { %>
-            <div class="flashcard" data-deck="<%= JSON.stringify(deck) %>" data-card="<%= JSON.stringify(card) %>">
+            <div class="flashcard" data-card="<%= JSON.stringify(card) %>">
               <div class="flashcard-top">
                 <span class="flashcard-top-header">front</span>
                 <p class="flashcard-top-body" id="front"></p>
@@ -49,12 +49,10 @@
     const header = document.querySelector('.flashcard-top-header');
     const content = document.getElementById('front');
     const answerBtns = document.querySelectorAll('.answer');
-    const deck = JSON.parse(flashcard.dataset.deck);
     const card = JSON.parse(flashcard.dataset.card);
     content.textContent = card.front;
 
     async function handleAnswer(e) {
-      // console.log(e.target.classList)
       const result = e.target.classList[1];
       header.textContent = '';
       content.textContent = card.back;
@@ -64,30 +62,35 @@
       newBtn.classList = 'fa-regular fa-circle-right';
       newBtn.id = '';
       
+      answerBtns[0].removeEventListener('click', handleAnswer);
       answerBtns[0].addEventListener('click', async () => fetchReview(result));
     }
 
     async function fetchReview(answer) {
       const success = answer === 'success' ? true : false;
-
+      showStatus('Saving...', 'load');
+      
       try {
-        const res = await fetch(`/decks/review/:${deck.id}`, {
+        const res = await fetch(`/decks/review/:${card.id}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ deck: deck, card: card, success: success })
+          body: JSON.stringify({ card: card, success: success })
         });
 
         const result = await res.json();
-        if (result.msg === 'Card reviewed') window.location.reload();
+        if (result.msg === 'Card reviewed') {
+          showStatus('Saved', 'success');
+          window.location.reload();
+        }
       } catch (err) {
         console.error(err);
         alert('Something went wrong. Please try again.');
       }
     }
 
-    // answerBtns.forEach(btn => btn.addEventListener('click', (e) => handleAnswer(e)));
+    answerBtns.forEach(btn => btn.addEventListener('click', (e) => handleAnswer(e)));
   </script>
 </body>
 </html>

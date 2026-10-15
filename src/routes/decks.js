@@ -1,24 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middleware/auth');
+const { getUsersDecks, getDeck, createDeck } = require('../controllers/decks');
+const { getUsersCards, filterDueCards, countDueCardsPerDeck, handleCardReview, getRandomCard, createCard, handleCardEdit, getNativeAudio, getCardsByDeck } = require('../controllers/cards');
 const langData = require('../utils/langData');
-const {
-  createDeck,
-  getUserDecks,
-  getDeck,
-  countDueCardsPerDeck,
-  getDueCards,
-  handleCardReview,
-  getRandomCard,
-  createCard,
-  handleCardEdit,
-  getNativeAudio,
-  deleteCard
-} = require('../controllers/decks');
 
 router.get('/', authenticateToken, async (req, res) => {
-  const decks = await getUserDecks(req.currentUserId);
-  const dueCardsPerDeck = await countDueCardsPerDeck(decks);
+  const decks = await getUsersDecks(req.currentUserId);
+  const cards = await getUsersCards(req.currentUserId);
+  const dueCards = filterDueCards(cards);
+  const dueCardsPerDeck = countDueCardsPerDeck(decks, dueCards);
   
   res.render('decks/index', {
     currentUser: req.user,
@@ -27,18 +18,22 @@ router.get('/', authenticateToken, async (req, res) => {
     langData
   });
 });
+
 router.get('/create', authenticateToken, (req, res) => res.render('decks/create', { currentUser: req.user }));
 router.post('/create', authenticateToken, createDeck);
 router.post('/:id/create-card', authenticateToken, createCard);
-router.delete('/card/delete/:cardId', deleteCard);
+// router.delete('/card/delete/:cardId', deleteCard);
 router.get('/review/:id', authenticateToken, async (req, res) => {
   const deck = await getDeck(req.params.id);
-  const cardsDue = await getDueCards(deck.cards);
-  const randomCard = getRandomCard(cardsDue);
+  const cards = await getCardsByDeck(req.currentUserId, req.params.id);
+  const dueCards = filterDueCards(cards);
+  const randomCard = getRandomCard(dueCards);
 
-  res.render('decks/review', { currentUser: req.user, deck, card: randomCard, totalDue: cardsDue.length });
+  res.render('decks/review', { currentUser: req.user, deck, card: randomCard, totalDue: dueCards.length });
 });
-router.post('/review/:id', authenticateToken, handleCardReview);
+router.post('/review/:cardId', authenticateToken, handleCardReview);
+
+
 router.get('/show/:id', authenticateToken, async (req, res) => {
   const deck = await getDeck(req.params.id);
   res.render('decks/show', { currentUser: req.user, deck });

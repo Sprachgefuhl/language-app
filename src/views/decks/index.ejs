@@ -24,7 +24,7 @@
 
                 <div class="card-item-right">
                   <p id="review-count">
-                    <%= dueCardsPerDeck.find(item => item.deckId === deck.id).totalCardsDue; %>
+                    <%= dueCardsPerDeck.find(item => item.deckId === deck.id).count; %>
                   </p>
                   <!-- <a href="/decks/show/<%= deck.id %>">
                     <i class="fa-regular fa-folder-open"></i>
