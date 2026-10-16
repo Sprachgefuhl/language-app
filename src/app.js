@@ -28,6 +28,10 @@ app.use('/decks', decksRouter);
 app.use('/profile', profileRouter);
 app.use('/admin/users', usersRouter);
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ msg: 'Healthy' });
+});
+
 app.listen(PORT, async () => {
   console.log(`🌐 Server running on Port: ${PORT}`);
 });
